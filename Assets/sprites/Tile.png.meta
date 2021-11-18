@@ -461,7 +461,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_17
+      name: hole
       rect:
         serializedVersion: 2
         x: 16
@@ -787,8 +787,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       water: -1216900957
+      hole: -1461768257
       Tile_12: 917435483
-      Tile_17: -1461768257
       Tile_10: 91905876
       Tile_20: 369697877
       Tile_21: -1218930202
