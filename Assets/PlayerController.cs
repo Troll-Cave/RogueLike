@@ -15,11 +15,19 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector3 target)
     {
         var collider = Physics2D.OverlapCircle(target, .1f);
+        
 
         var current = gameObject.transform.position;
 
         if (collider != null)
         {
+            if (collider.gameObject.tag == "Enemies")
+            {
+                Debug.Log(collider.gameObject);
+                Destroy(collider.gameObject);
+                return;
+            }
+
             var targetX = target.WithY(current.y);
             var targetY = target.WithX(current.x);
 
