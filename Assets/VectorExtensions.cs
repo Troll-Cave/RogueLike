@@ -34,5 +34,10 @@ namespace Extensions
             // don't need to clamp z and no-one gives a shit about it
             return new Vector3(Mathf.Clamp(vector.x, min, max), Mathf.Clamp(vector.y, min, max), vector.z);
         }
+
+        public static Vector3 ToVector3(this Vector2 vector, float z = 0)
+        {
+            return new Vector3(vector.x, vector.y, z);
+        }
     }
 }

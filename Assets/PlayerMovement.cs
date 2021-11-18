@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using Extensions;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,8 +17,16 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         GetComponent<PlayerInput>().actions["Click"].performed += ctx => Clicked();
+        GetComponent<PlayerInput>().actions["Movement"].performed += ctx => DirectionalMove(ctx.ReadValue<Vector2>());
+
+
         lookAction = GetComponent<PlayerInput>().actions["Look"];
         controller = GetComponent<PlayerController>();
+    }
+
+    private void DirectionalMove(Vector2 vector2)
+    {
+        toMove = gameObject.transform.position + (vector2.ToVector3() * 2).Clamp();
     }
 
     // TODO: save the movement from the click and do it in a FixedUpdate
