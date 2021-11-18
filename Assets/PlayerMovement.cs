@@ -8,11 +8,16 @@ using Extensions;
 public class PlayerMovement : MonoBehaviour
 {
     private InputAction lookAction;
+
+    private Vector3 toMove = Vector3.zero;
+    private PlayerController controller;
+
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<PlayerInput>().actions["Click"].performed += ctx => Clicked();
         lookAction = GetComponent<PlayerInput>().actions["Look"];
+        controller = GetComponent<PlayerController>();
     }
 
     // TODO: save the movement from the click and do it in a FixedUpdate
@@ -25,38 +30,18 @@ public class PlayerMovement : MonoBehaviour
         var diff = (gameObject.transform.position - pos.Round().WithZ(0)).Clamp();
 
         // Apply the difference to the character
-        var target = gameObject.transform.position - diff;
-
-        var collider = Physics2D.OverlapCircle(target, .1f);
-
-        var current = gameObject.transform.position;
-
-        if (collider != null)
-        {
-            Debug.Log(collider);
-            var targetX = target.WithY(current.y);
-            var targetY = target.WithX(current.x);
-
-            if (Physics2D.OverlapCircle(targetX, .1f) == null)
-            {
-                target = targetX;
-            }
-            else if (Physics2D.OverlapCircle(targetY, .1f) == null)
-            {
-                target = targetY;
-            }
-            else
-            {
-                target = gameObject.transform.position;
-            }
-        }
-
-        gameObject.transform.position = target;
+        toMove = gameObject.transform.position - diff;
     }
 
-    // Update is called once per frame
-    void Update()
+    // All player movement goes here to align with the physics engine
+    // Not sure this matters if we aren't a rigidbody but whatevs
+    void FixedUpdate()
     {
-
+        if (toMove != Vector3.zero)
+        {
+            controller.Move(toMove);
+            // do the move
+            toMove = Vector3.zero;
+        }
     }
 }
