@@ -50,16 +50,23 @@ public class EnemyAI : MonoBehaviour
 
         while (hashMap.Count > 0)
         {
-            target = hashMap[Random.Range(0, hashMap.Count - 1)];
-            target += corner.ToVector2();
+            var temp = hashMap[Random.Range(0, hashMap.Count - 1)];
+            target = temp + corner.ToVector2();
 
             if (!Physics2D.OverlapCircle(target, .1f, layerMask))
             {
                 break;
             }
-        }
 
-        transform.position = target;
+            hashMap.Remove(temp);
+        }
+        
+        // If there's even one left do the move, otherwise no option was found
+        if (hashMap.Count > 0)
+        {
+            transform.position = target;
+        }
+        
     }
 
     public void MakeTurn()
