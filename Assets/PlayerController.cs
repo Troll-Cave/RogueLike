@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log(collider.gameObject);
                 Destroy(collider.gameObject);
+
+                TurnManager.turnManager?.RunTurns(); // attacks are an action
                 return;
             }
 
@@ -45,6 +47,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        gameObject.transform.position = target;
+        if (gameObject.transform.position != target)
+        {
+            gameObject.transform.position = target;
+            TurnManager.turnManager?.RunTurns();
+        }
+        
     }
 }
