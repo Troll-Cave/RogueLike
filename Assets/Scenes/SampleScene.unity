@@ -1131,6 +1131,27 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &1218431438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7339228033840033636, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+  m_PrefabInstance: {fileID: 7339228034900689674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1218431444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218431438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102982023ae1e884198a1e279178ee6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: 21300000, guid: 978e11e4ae261c140aab219d0a779cc8, type: 3}
+  - {fileID: 21300000, guid: 8787162b47bc7854dbe0db483e0daca2, type: 3}
+  fps: 4
 --- !u!1 &1361026016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,6 +1163,7 @@ GameObject:
   - component: {fileID: 1361026018}
   - component: {fileID: 1361026017}
   - component: {fileID: 1361026019}
+  - component: {fileID: 1361026020}
   m_Layer: 9
   m_Name: SnakeBro
   m_TagString: Enemies
@@ -1242,6 +1264,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1361026020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361026016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102982023ae1e884198a1e279178ee6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: 21300000, guid: f7b0c3d734ac34d4d92bc022976fbc42, type: 3}
+  - {fileID: 21300000, guid: b0deeb951a9441942ad87dd125b334bb, type: 3}
+  fps: 4
 --- !u!1001 &7339228034900689674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1295,6 +1333,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7339228033840033658, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339228033840033659, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
