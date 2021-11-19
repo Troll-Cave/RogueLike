@@ -25,14 +25,52 @@ public class EnemyAI : MonoBehaviour
     {
         if (moveOnUpdate)
         {
-            MakeMove();
+            Collider2D colliderplayer = Physics2D.OverlapCircle(transform.position, 3, LayerMask.GetMask("Player"));
+
+            if (colliderplayer != null)
+            {
+                MoveTowardPlayer(colliderplayer);
+            }
+            else
+            {
+                MakeMove();
+            }
+            
             moveOnUpdate = false;
         }
+    }
+
+    private void MoveTowardPlayer(Collider2D colliderplayer)
+    {
+        var target = colliderplayer.gameObject.transform.position;
+        var current = transform.position;
+
+        var diff = (target - current).Clamp();
+        target = current + diff;
+
+        var targetX = target.WithY(current.y);
+        var targetY = target.WithX(current.x);
+
+        if (Physics2D.OverlapCircle(targetX, .1f) == null)
+        {
+            target = targetX;
+        }
+        else if (Physics2D.OverlapCircle(targetY, .1f) == null)
+        {
+            target = targetY;
+        }
+        else
+        {
+            target = gameObject.transform.position;
+        }
+
+        transform.position = target;
     }
 
     private void MakeMove()
     {
         var corner = transform.position;
+
 
         List<Vector2> hashMap = new List<Vector2>();
         hashMap.Add(new Vector2(-1, 1));
