@@ -40,6 +40,11 @@ namespace Extensions
             return new Vector3(vector.x, vector.y, z);
         }
 
+        public static Vector3Int ToVector3int(this Vector2 vector, int z = 0)
+        {
+            return new Vector3Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y), z);
+        }
+
         public static Vector2 ToVector2(this Vector3 vector)
         {
             return new Vector2(vector.x, vector.y);
