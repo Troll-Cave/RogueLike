@@ -49,5 +49,24 @@ namespace Extensions
         {
             return new Vector2(vector.x, vector.y);
         }
+
+        public static void AddVector(this ICollection<Vector2> list, int x, int y)
+        {
+            list.Add(new Vector2(x, y));
+        }
+
+        public static Vector2 AddX(this Vector2 vector, float x)
+        {
+            var newVector = vector;
+            newVector.x += x;
+            return newVector;
+        }
+
+        public static Vector2 AddY(this Vector2 vector, float y)
+        {
+            var newVector = vector;
+            newVector.y += y;
+            return newVector;
+        }
     }
 }
