@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floors: {fileID: 2104111607}
+  walls: {fileID: 328402452}
 --- !u!114 &1112295061
 MonoBehaviour:
   m_ObjectHideFlags: 0

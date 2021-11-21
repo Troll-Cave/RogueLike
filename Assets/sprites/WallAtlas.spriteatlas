@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WallAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -1470448392, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: 1533766477, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -224427912, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -1087563815, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -18410210, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -545340241, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: 1801494051, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -855753361, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -1868585774, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -1706214433, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: 1117923889, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -1572056671, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  - {fileID: -62130151, guid: 32bb461898f720c4e933c865274303a9, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - brick_wall_12
+  - brick_wall_11
+  - brick_wall_10
+  - brick_wall_8
+  - brick_wall_9
+  - brick_wall_4
+  - brick_wall_5
+  - brick_wall_6
+  - brick_wall_7
+  - brick_wall_0
+  - brick_wall_1
+  - brick_wall_2
+  - brick_wall_3
+  m_RenderDataMap: {}
+  m_Tag: WallAtlas
+  m_IsVariant: 0

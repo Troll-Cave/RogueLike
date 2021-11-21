@@ -8,14 +8,48 @@ using Extensions;
 using System.Linq;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.U2D;
 
 public class DungeonGenerator : MonoBehaviour
 {
     public Tilemap floors;
+    public Tilemap walls;
 
     private TileBase tile;
 
     private const int maxMapSize = 50;
+
+    private List<Tile> wallTiles = new List<Tile>();
+
+    // These are constants for getting walls
+    static Vector2 TopLeft = new(-1 , 1);
+    static Vector2 Top = new(0, 1);
+    static Vector2 TopRight = new(1, 1);
+
+    static Vector2 Left = new(-1, 0);
+    static Vector2 Right = new(1, 0);
+
+    static Vector2 BottomLeft = new(-1, -1);
+    static Vector2 Botton = new(0, -1);
+    static Vector2 BottomRight = new(1, -1);
+
+    private List<Vector2> getRelativeVectors()
+    {
+        var retval = new List<Vector2>();
+
+        retval.Add(TopLeft);
+        retval.Add(Top);
+        retval.Add(TopRight);
+
+        retval.Add(Left);
+        retval.Add(Right);
+
+        retval.Add(BottomLeft);
+        retval.Add(Botton);
+        retval.Add(BottomRight);
+
+        return retval;
+    }
 
     private void Start()
     {
@@ -34,6 +68,17 @@ public class DungeonGenerator : MonoBehaviour
     private void Awake()
     {
         tile = AssetDatabase.LoadAssetAtPath<TileBase>("Assets/stone_2_15.asset");
+
+        var atlas = AssetDatabase.LoadAssetAtPath<SpriteAtlas>("Assets/sprites/WallAtlas.spriteatlas");
+
+        for (var i = 0; i <= 13; i++)
+        {
+            var sprite = atlas.GetSprite("brick_wall_" + i);
+            var ti = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
+            ti.sprite = sprite;
+
+            wallTiles.Add(ti);
+        }
 
         var t = Time.realtimeSinceStartup;
         DrawMap();
@@ -59,6 +104,35 @@ public class DungeonGenerator : MonoBehaviour
         foreach (var entry in map)
         {
             floors.SetTile(entry.ToVector3int(), tile);
+        }
+
+        var walls = new HashSet<Wall>();
+
+        var relativeVectors = getRelativeVectors();
+
+        foreach (var floor in map)
+        {
+            foreach (var vector in relativeVectors)
+            {
+                var loc = floor + vector;
+                if (!map.Contains(loc))
+                {
+                    // Got a match for a wall
+                    var wall = walls.FirstOrDefault(x => x.position == loc) ?? new Wall(loc);
+                    wall.floors.Add(Vector2.zero - vector);
+
+                    walls.Add(wall);
+                }
+            }
+        }
+
+        foreach (var wall in walls)
+        {
+            var index = wall.GetWallTileIndex();
+            if (index.HasValue)
+            {
+                floors.SetTile(wall.position.ToVector3int(), wallTiles[index.Value]);
+            }
         }
     }
 
@@ -258,6 +332,96 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         return rooms;
+    }
+
+    class Wall
+    {
+        public Vector2 position { get; set; }
+        public List<Vector2> floors { get; set; } = new List<Vector2>();
+
+        public Wall(Vector2 position)
+        {
+            this.position = position;
+        }
+
+        public int? GetWallTileIndex()
+        {
+            if (floors.Contains(Top) && floors.Contains(Right) && floors.Contains(Left))
+            {
+                return 5;
+            }
+
+            if (floors.Contains(Botton) && floors.Contains(Right) && floors.Contains(Left))
+            {
+                return 6;
+            }
+
+            if (floors.Contains(Top) && floors.Contains(Botton) && floors.Contains(Left))
+            {
+                return 1;
+            }
+
+            if (floors.Contains(Top) && floors.Contains(Right))
+            {
+                return 2;
+            }
+
+            if (floors.Contains(Top) && floors.Contains(Left))
+            {
+                return 0;
+            }
+
+            if (floors.Contains(Botton) && floors.Contains(Right))
+            {
+                return 11;
+            }
+
+            if (floors.Contains(Botton) && floors.Contains(Left))
+            {
+                return 10;
+            }
+
+            if (floors.Contains(Right) && floors.Contains(BottomLeft))
+            {
+                return 9;
+            }
+
+            if (floors.Contains(Botton))
+            {
+                return 1;
+            }
+
+            if (floors.Contains(Top))
+            {
+                return 1;
+            }
+
+            if (floors.Contains(Right) || floors.Contains(Left))
+            {
+                return 5;
+            }
+
+            if (floors.Contains(BottomRight))
+            {
+                return 0;
+            }
+
+            if (floors.Contains(BottomLeft))
+            {
+                return 2;
+            }
+
+            if (floors.Contains(TopRight))
+            {
+                return 10;
+            }
+
+            if (floors.Contains(TopLeft))
+            {
+                return 11;
+            }
+            return null;
+        }
     }
 
     class RoomTreeNode
