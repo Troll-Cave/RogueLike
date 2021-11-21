@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
         var collider = Physics2D.OverlapCircle(target, .1f);
 
         var current = gameObject.transform.position;
-        Debug.Log(target);
+
         if (collider != null)
         {
             Debug.Log(collider);
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(collider.gameObject);
                 Destroy(collider.gameObject);
 
-                TurnManager.turnManager?.RunTurns(); // attacks are an action
+                TurnManager.RunTurns(); // attacks are an action
                 return;
             }
 
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         if (gameObject.transform.position != target)
         {
             gameObject.transform.position = target;
-            TurnManager.turnManager?.RunTurns();
+            TurnManager.RunTurns();
         }
         
     }

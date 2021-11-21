@@ -14,12 +14,13 @@ public class DungeonGenerator : MonoBehaviour
 {
     public Tilemap floors;
     public Tilemap wallsTilemap;
+    public GameObject enemyPrefab;
 
     public Transform playerTransform;
 
     private TileBase tile;
 
-    private const int maxMapSize = 50;
+    private const int maxMapSize = 10;
 
     private List<Tile> wallTiles = new List<Tile>();
 
@@ -139,6 +140,10 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         playerTransform.position = GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3();
+
+        // Add some random enemies
+        Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
+        Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
     }
 
     Room GetRandomRoom(List<Room> rooms)

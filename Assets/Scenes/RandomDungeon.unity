@@ -413,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floors: {fileID: 2104111607}
   wallsTilemap: {fileID: 328402452}
+  enemyPrefab: {fileID: 4859601161909702031, guid: 565d948cc0de4b6438afc625be644c6f, type: 3}
   playerTransform: {fileID: 1890307964}
 --- !u!1001 &1890307963
 PrefabInstance:

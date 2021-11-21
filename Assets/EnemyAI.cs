@@ -42,14 +42,23 @@ public class EnemyAI : MonoBehaviour
 
     private void MoveTowardPlayer(Collider2D colliderplayer)
     {
-        var target = colliderplayer.gameObject.transform.position;
+        var playerPosition = colliderplayer.gameObject.transform.position;
         var current = transform.position;
 
-        var diff = (target - current).Clamp();
-        target = current + diff;
+        Debug.Log(current);
+
+        var diff = (playerPosition - current).Clamp();
+        var target = current + diff;
 
         var targetX = target.WithY(current.y);
         var targetY = target.WithX(current.x);
+
+        if (playerPosition == target)
+        {
+            // Don't move into the player!
+            Debug.Log("HIT");
+            return;
+        }
 
         if (Physics2D.OverlapCircle(targetX, .1f) == null)
         {
@@ -114,12 +123,12 @@ public class EnemyAI : MonoBehaviour
 
     private void OnEnable()
     {
-        TurnManager.turnManager.Register(this);
+        TurnManager.Register(this);
     }
 
     private void OnDisable()
     {
         // This can fail if the turn manager is killed first
-        TurnManager.turnManager?.DeRegister(this);
+        TurnManager.DeRegister(this);
     }
 }
