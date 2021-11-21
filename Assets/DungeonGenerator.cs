@@ -19,7 +19,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private TileBase tile;
 
-    private const int maxMapSize = 10;
+    private const int maxMapSize = 50;
 
     private List<Tile> wallTiles = new List<Tile>();
 
@@ -138,7 +138,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        playerTransform.position = GetRandomRoom(rooms).GetRandomPoint().ToVector3();
+        playerTransform.position = GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3();
     }
 
     Room GetRandomRoom(List<Room> rooms)
@@ -535,7 +535,17 @@ public class DungeonGenerator : MonoBehaviour
         /// <returns></returns>
         public Vector2 GetRandomPoint()
         {
-            return new Vector2(UnityEngine.Random.Range(x, x + width - 1), UnityEngine.Random.Range(y, y + height - 1));
+            var v = new Vector2(UnityEngine.Random.Range(x, x + (width)), UnityEngine.Random.Range(y, y + (height)));
+            return v;
+        }
+
+        /// <summary>
+        /// For some reason the grid is offset by one
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 GetRandomPointInWorld()
+        {
+            return GetRandomPoint() + new Vector2(1, 1);
         }
     }
 }
