@@ -13,11 +13,13 @@ using UnityEngine.U2D;
 public class DungeonGenerator : MonoBehaviour
 {
     public Tilemap floors;
-    public Tilemap walls;
+    public Tilemap wallsTilemap;
+
+    public Transform playerTransform;
 
     private TileBase tile;
 
-    private const int maxMapSize = 50;
+    private const int maxMapSize = 10;
 
     private List<Tile> wallTiles = new List<Tile>();
 
@@ -32,6 +34,7 @@ public class DungeonGenerator : MonoBehaviour
     static Vector2 BottomLeft = new(-1, -1);
     static Vector2 Botton = new(0, -1);
     static Vector2 BottomRight = new(1, -1);
+
 
     private List<Vector2> getRelativeVectors()
     {
@@ -53,7 +56,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<PlayerInput>().actions["Scroll"].performed += ctx => Scroll(ctx.ReadValue<float>());
+        //GetComponent<PlayerInput>().actions["Scroll"].performed += ctx => Scroll(ctx.ReadValue<float>());
     }
 
     private void Scroll(float v)
@@ -90,7 +93,9 @@ public class DungeonGenerator : MonoBehaviour
         var map = new HashSet<Vector2>();
         
         var rooms = GetRooms();
-        
+
+        rooms = AddConnections(map, rooms);
+
         foreach (var room in rooms)
         {
             foreach (var v in room.GetVectors())
@@ -98,8 +103,6 @@ public class DungeonGenerator : MonoBehaviour
                 map.Add(v);
             }
         }
-
-        AddConnections(map, rooms);
 
         foreach (var entry in map)
         {
@@ -131,12 +134,21 @@ public class DungeonGenerator : MonoBehaviour
             var index = wall.GetWallTileIndex();
             if (index.HasValue)
             {
-                floors.SetTile(wall.position.ToVector3int(), wallTiles[index.Value]);
+                wallsTilemap.SetTile(wall.position.ToVector3int(), wallTiles[index.Value]);
             }
         }
+
+        playerTransform.position = GetRandomRoom(rooms).GetRandomPoint().ToVector3();
     }
 
-    private void AddConnections(HashSet<Vector2> map, List<Room> rooms)
+    Room GetRandomRoom(List<Room> rooms)
+    {
+        var i = UnityEngine.Random.Range(0, rooms.Count - 1);
+
+        return rooms[i];
+    }
+
+    private List<Room> AddConnections(HashSet<Vector2> map, List<Room> rooms)
     {
         var allRooms = new List<Room>(rooms);
         var remainingRooms = new List<Room>(rooms);
@@ -196,7 +208,12 @@ public class DungeonGenerator : MonoBehaviour
             root = target;
         }
 
-        Debug.Log(remainingRooms.Count);
+        // Return back just the rooms that were added
+        return treeNodes.Select(r => r.id)
+            .ToList()
+            .Distinct()
+            .Select(x => allRooms.FirstOrDefault(y => y.id == x))
+            .ToList();
     }
 
     private RoomTreeNode GetTreeNode(Room root, Dictionary<string, float> allWeights, List<Room> allRooms)
@@ -420,7 +437,32 @@ public class DungeonGenerator : MonoBehaviour
             {
                 return 11;
             }
+
+
             return null;
+        }
+
+        private List<Vector2> from(params Vector2[] vectors)
+        {
+            return vectors.ToList();
+        }
+
+        private bool CheckFloors(List<Vector2> vectors)
+        {
+            if (floors.Count != vectors.Count)
+            {
+                return false;
+            }
+
+            foreach(var vector in vectors)
+            {
+                if (!floors.Contains(vector))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 

@@ -15,12 +15,12 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector3 target)
     {
         var collider = Physics2D.OverlapCircle(target, .1f);
-        
 
         var current = gameObject.transform.position;
-
+        Debug.Log(target);
         if (collider != null)
         {
+            Debug.Log(collider);
             if (collider.gameObject.tag == "Enemies")
             {
                 Debug.Log(collider.gameObject);
