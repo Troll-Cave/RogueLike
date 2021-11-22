@@ -16,6 +16,9 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = sprites.GetSprite("rl_" + enemy.spriteLetter);
+        
+        // always start these guys transparent
+        GetComponent<SpriteRenderer>().color = ColorsManager.GetColor(enemy.color).Transparent();
     }
 
     // Update is called once per frame

@@ -166,14 +166,8 @@ public class DungeonGenerator : MonoBehaviour
         foreach(var enemy in enemies)
         {
             enemyPrefab.GetComponent<EnemyAI>().enemy = enemy;
-            enemyPrefab.GetComponent<SpriteRenderer>().color = ColorsManager.GetColor(enemy.color).Transparent();
-
-            // Add some random enemies
             Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
         }
-
-        
-        
     }
 
     Room GetRandomRoom(List<Room> rooms)
