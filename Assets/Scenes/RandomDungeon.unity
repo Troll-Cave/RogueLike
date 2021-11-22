@@ -424,10 +424,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4379617443619636122, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
-      propertyPath: fowMask.m_Bits
-      value: 1792
-      objectReference: {fileID: 0}
     - target: {fileID: 7339228033840033636, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: m_Name
       value: Player
