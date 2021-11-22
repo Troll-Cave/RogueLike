@@ -203,7 +203,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1839735485 &328402452
@@ -222,7 +222,7 @@ Tilemap:
   m_TileColorArray: []
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7607843, g: 0.7647059, b: 0.78039217, a: 0}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -414,6 +414,8 @@ MonoBehaviour:
   floors: {fileID: 2104111607}
   wallsTilemap: {fileID: 328402452}
   enemyPrefab: {fileID: 4859601161909702031, guid: 565d948cc0de4b6438afc625be644c6f, type: 3}
+  wallPrefab: {fileID: 3231908258070252573, guid: 0d9243eb98cc0a349b343eacc44652dc, type: 3}
+  floorPrefab: {fileID: 9167621052082939076, guid: fcaab1e2fdd8aad42843b6adb7513001, type: 3}
   playerTransform: {fileID: 1890307964}
 --- !u!1001 &1890307963
 PrefabInstance:
@@ -422,6 +424,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4379617443619636122, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: obsticals.m_Bits
+      value: 951
+      objectReference: {fileID: 0}
     - target: {fileID: 7339228033840033636, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: m_Name
       value: Player
@@ -488,7 +494,7 @@ GameObject:
   - component: {fileID: 2104111605}
   - component: {fileID: 2104111607}
   - component: {fileID: 2104111606}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

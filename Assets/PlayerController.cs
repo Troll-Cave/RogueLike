@@ -6,6 +6,7 @@ using Extensions;
 
 public class PlayerController : MonoBehaviour
 {
+    public LayerMask obsticals;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector3 target)
     {
-        var collider = Physics2D.OverlapCircle(target, .1f);
+        var collider = Physics2D.OverlapCircle(target, .1f, obsticals);
 
         var current = gameObject.transform.position;
 

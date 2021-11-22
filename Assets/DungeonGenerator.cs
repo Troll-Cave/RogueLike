@@ -16,13 +16,16 @@ public class DungeonGenerator : MonoBehaviour
     public Tilemap wallsTilemap;
     public GameObject enemyPrefab;
 
+    public GameObject wallPrefab;
+    public GameObject floorPrefab;
+
     public Transform playerTransform;
 
-    private TileBase tile;
+    private Tile tile;
 
     private const int maxMapSize = 10;
 
-    private List<Tile> wallTiles = new List<Tile>();
+    private Tile wallTile;
 
     // These are constants for getting walls
     static Vector2 TopLeft = new(-1 , 1);
@@ -71,18 +74,16 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Awake()
     {
-        tile = AssetDatabase.LoadAssetAtPath<TileBase>("Assets/stone_2_15.asset");
-
         var atlas = AssetDatabase.LoadAssetAtPath<SpriteAtlas>("Assets/sprites/WallAtlas.spriteatlas");
 
-        for (var i = 0; i <= 13; i++)
-        {
-            var sprite = atlas.GetSprite("brick_wall_" + i);
-            var ti = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
-            ti.sprite = sprite;
+        tile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
+        tile.sprite = atlas.GetSprite("rl_floor");
+        tile.color = new Color32(95, 87, 79, 0xff);
+        
 
-            wallTiles.Add(ti);
-        }
+        wallTile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
+        wallTile.sprite = atlas.GetSprite("rl_wall");
+        wallTile.color = new Color32(194, 195, 199, 0xff);
 
         var t = Time.realtimeSinceStartup;
         DrawMap();
@@ -107,7 +108,7 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (var entry in map)
         {
-            floors.SetTile(entry.ToVector3int(), tile);
+            Instantiate(floorPrefab, entry.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
         }
 
         var walls = new HashSet<Wall>();
@@ -135,15 +136,18 @@ public class DungeonGenerator : MonoBehaviour
             var index = wall.GetWallTileIndex();
             if (index.HasValue)
             {
-                wallsTilemap.SetTile(wall.position.ToVector3int(), wallTiles[index.Value]);
+                Instantiate(wallPrefab, wall.position.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
             }
         }
 
         playerTransform.position = GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3();
 
         // Add some random enemies
-        Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
-        Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
+        var obj = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
+        obj.GetComponent<SpriteRenderer>().color = new Color32(0, 135, 81, 0);
+        
+        obj = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
+        obj.GetComponent<SpriteRenderer>().color = new Color32(0, 135, 81, 0);
     }
 
     Room GetRandomRoom(List<Room> rooms)

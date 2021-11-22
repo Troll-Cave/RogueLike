@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7339228033840033657}
   - component: {fileID: -4379617443619636122}
   - component: {fileID: 1218431450}
-  - component: {fileID: 1218431444}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -78,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 1118320837
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 978e11e4ae261c140aab219d0a779cc8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 1865434070, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  m_Color: {r: 1, g: 0.9254902, b: 0.15294118, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,6 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fdb75b240996904eaee31720c0adc83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fowMask:
+    serializedVersion: 2
+    m_Bits: 1280
 --- !u!114 &7339228033840033657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81adcf228dac7242916819c45a84789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obsticals:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &1218431450
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -169,19 +174,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1218431444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7339228033840033636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 102982023ae1e884198a1e279178ee6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frames:
-  - {fileID: 21300000, guid: 978e11e4ae261c140aab219d0a779cc8, type: 3}
-  - {fileID: 21300000, guid: 8787162b47bc7854dbe0db483e0daca2, type: 3}
-  fps: 4

@@ -6,13 +6,17 @@ using UnityEngine.InputSystem;
 using Extensions;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public LayerMask fowMask;
+
     private InputAction lookAction;
 
     private Vector3 toMove = Vector3.zero;
     private PlayerController controller;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,13 @@ public class PlayerMovement : MonoBehaviour
 
         lookAction = GetComponent<PlayerInput>().actions["Look"];
         controller = GetComponent<PlayerController>();
+
+        var colliders = Physics2D.OverlapCircleAll(transform.position, 3, fowMask);
+        foreach (var collider in colliders)
+        {
+            var renderer = collider.GetComponent<SpriteRenderer>();
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1);
+        }
     }
 
     private void OnDestroy()
@@ -55,6 +66,19 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 vector2 = ctx.ReadValue<Vector2>();
         toMove = gameObject.transform.position + (vector2.ToVector3() * 2).Clamp();
+
+        // only do this on move
+        var colliders = Physics2D.OverlapCircleAll(transform.position, 3, fowMask);
+        foreach (var collider in colliders)
+        {
+            var renderer = collider.GetComponent<SpriteRenderer>();
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1);
+
+            if (renderer.gameObject.name.StartsWith("floor"))
+            {
+                renderer.GetComponent<BoxCollider2D>().enabled = false;
+            }
+        }
     }
 
     // TODO: save the movement from the click and do it in a FixedUpdate
