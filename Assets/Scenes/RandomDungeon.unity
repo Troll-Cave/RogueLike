@@ -411,8 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67523bed77cccfb4399affefd155521f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floors: {fileID: 2104111607}
-  wallsTilemap: {fileID: 328402452}
+  atlas: {fileID: 4343727234628468602, guid: bc4538fdf008f304aa472fcf2d3e0d46, type: 2}
   enemyPrefab: {fileID: 4859601161909702031, guid: 565d948cc0de4b6438afc625be644c6f, type: 3}
   wallPrefab: {fileID: 3231908258070252573, guid: 0d9243eb98cc0a349b343eacc44652dc, type: 3}
   floorPrefab: {fileID: 9167621052082939076, guid: fcaab1e2fdd8aad42843b6adb7513001, type: 3}

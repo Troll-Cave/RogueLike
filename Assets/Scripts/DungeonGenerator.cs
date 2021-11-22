@@ -12,10 +12,9 @@ using UnityEngine.U2D;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    public Tilemap floors;
-    public Tilemap wallsTilemap;
-    public GameObject enemyPrefab;
+    public SpriteAtlas atlas;
 
+    public GameObject enemyPrefab;
     public GameObject wallPrefab;
     public GameObject floorPrefab;
 
@@ -80,8 +79,6 @@ public class DungeonGenerator : MonoBehaviour
         enemies = Resources.LoadAll<Enemy>("Enemies/").ToList();
 
         Debug.Log(enemies);
-
-        var atlas = Resources.Load<SpriteAtlas>("Sprites");
 
         tile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
         tile.sprite = atlas.GetSprite("rl_floor");

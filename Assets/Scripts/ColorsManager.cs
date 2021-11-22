@@ -13,6 +13,7 @@ public enum Colors
 
 public static class ColorsManager
 {
+    public static string Blob;
     public static Color Black { get; private set; } = new Color32(21, 21, 21, 0xff);
     public static Color Blue { get; private set; } = new Color32(76, 96, 135, 0xff);
     public static Color Green { get; private set; } = new Color32(65, 139, 87, 0xff);
