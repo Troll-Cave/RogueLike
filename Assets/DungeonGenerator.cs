@@ -75,7 +75,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Awake()
     {
-        var atlas = AssetDatabase.LoadAssetAtPath<SpriteAtlas>("Assets/sprites/WallAtlas.spriteatlas");
+        var atlas = Resources.Load<SpriteAtlas>("Sprites");
 
         tile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
         tile.sprite = atlas.GetSprite("rl_floor");

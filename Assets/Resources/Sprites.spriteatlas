@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WallAtlas
+  m_Name: Sprites
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -438,5 +438,5 @@ SpriteAtlas:
   - classic_roguelike_white_15
   - classic_roguelike_white_14
   m_RenderDataMap: {}
-  m_Tag: WallAtlas
+  m_Tag: Sprites
   m_IsVariant: 0
