@@ -6,11 +6,27 @@ using Extensions;
 
 public class PlayerController : MonoBehaviour
 {
+    public LayerMask fowMask;
     public LayerMask obsticals;
     // Start is called before the first frame update
     void Start()
     {
-        
+        RevealFOW();
+    }
+
+    public void RevealFOW()
+    {
+        var fowColliders = Physics2D.OverlapCircleAll(transform.position, 3, fowMask);
+        foreach (var fowCollider in fowColliders)
+        {
+            var renderer = fowCollider.GetComponent<SpriteRenderer>();
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1);
+
+            if (renderer.gameObject.name.StartsWith("Floor"))
+            {
+                Destroy(renderer.gameObject.GetComponent<BoxCollider2D>());
+            }
+        }
     }
 
     public void Move(Vector3 target)
@@ -51,6 +67,9 @@ public class PlayerController : MonoBehaviour
         if (gameObject.transform.position != target)
         {
             gameObject.transform.position = target;
+
+            RevealFOW();
+
             TurnManager.RunTurns();
         }
         

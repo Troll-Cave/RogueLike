@@ -22,6 +22,7 @@ public class DungeonGenerator : MonoBehaviour
     public Transform playerTransform;
 
     private Tile tile;
+    private List<Sprite> brokenFloors = new List<Sprite>();
 
     private const int maxMapSize = 10;
 
@@ -79,6 +80,11 @@ public class DungeonGenerator : MonoBehaviour
         tile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
         tile.sprite = atlas.GetSprite("rl_floor");
         tile.color = new Color32(95, 87, 79, 0xff);
+
+        for (var i = 0; i < 4; i++)
+        {
+            brokenFloors.Add(atlas.GetSprite("rl_floor_broken_" + (i + 1)));
+        }
         
 
         wallTile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
@@ -108,7 +114,15 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (var entry in map)
         {
-            Instantiate(floorPrefab, entry.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
+            var floor = Instantiate(floorPrefab, entry.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
+
+
+            if (UnityEngine.Random.Range(0, 5) == 0)
+            {
+                // We've got a match
+                var renderer = floor.GetComponent<SpriteRenderer>();
+                renderer.sprite = brokenFloors[UnityEngine.Random.Range(0, 3)];
+            }
         }
 
         var walls = new HashSet<Wall>();
@@ -137,6 +151,8 @@ public class DungeonGenerator : MonoBehaviour
             if (index.HasValue)
             {
                 Instantiate(wallPrefab, wall.position.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
+
+                
             }
         }
 
@@ -144,10 +160,10 @@ public class DungeonGenerator : MonoBehaviour
 
         // Add some random enemies
         var obj = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
-        obj.GetComponent<SpriteRenderer>().color = new Color32(0, 135, 81, 0);
+        obj.GetComponent<SpriteRenderer>().color = new Color32(65, 139, 87, 0);
         
         obj = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
-        obj.GetComponent<SpriteRenderer>().color = new Color32(0, 135, 81, 0);
+        obj.GetComponent<SpriteRenderer>().color = new Color32(65, 139, 87, 0);
     }
 
     Room GetRandomRoom(List<Room> rooms)
