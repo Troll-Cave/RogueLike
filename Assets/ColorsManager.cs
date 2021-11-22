@@ -5,6 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+public enum Colors
+{
+    Green,
+    Red,
+}
+
 public static class ColorsManager
 {
     public static Color Black { get; private set; } = new Color32(21, 21, 21, 0xff);
@@ -24,6 +30,20 @@ public static class ColorsManager
     public static Color Yellow { get; private set; } = new Color32(240, 180, 158, 0xff);
     public static Color White { get; private set; } = new Color32(255, 250, 232, 0xff);
 
+    public static Color GetColor(Colors color)
+    {
+        if (color == Colors.Green)
+        {
+            return Green;
+        }
+
+        if (color == Colors.Red)
+        {
+            return Red;
+        }
+
+        return White;
+    }
 }
 
 public static class ColorExtensions

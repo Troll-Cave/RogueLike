@@ -40,6 +40,7 @@ public class DungeonGenerator : MonoBehaviour
     static Vector2 Botton = new(0, -1);
     static Vector2 BottomRight = new(1, -1);
 
+    private List<Enemy> enemies;
 
     private List<Vector2> getRelativeVectors()
     {
@@ -62,6 +63,7 @@ public class DungeonGenerator : MonoBehaviour
     private void Start()
     {
         //GetComponent<PlayerInput>().actions["Scroll"].performed += ctx => Scroll(ctx.ReadValue<float>());
+        
     }
 
     private void Scroll(float v)
@@ -75,6 +77,10 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Awake()
     {
+        enemies = Resources.LoadAll<Enemy>("Enemies/").ToList();
+
+        Debug.Log(enemies);
+
         var atlas = Resources.Load<SpriteAtlas>("Sprites");
 
         tile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
@@ -114,9 +120,8 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (var entry in map)
         {
+            floorPrefab.GetComponent<SpriteRenderer>().color = ColorsManager.DarkGray.Transparent();
             var floor = Instantiate(floorPrefab, entry.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
-            floor.GetComponent<SpriteRenderer>().color = ColorsManager.DarkGray.Transparent();
-
 
             if (UnityEngine.Random.Range(0, 5) == 0)
             {
@@ -151,19 +156,24 @@ public class DungeonGenerator : MonoBehaviour
             var index = wall.GetWallTileIndex();
             if (index.HasValue)
             {
+                wallPrefab.GetComponent<SpriteRenderer>().color = ColorsManager.LightGray.Transparent();
                 var wallObject = Instantiate(wallPrefab, wall.position.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
-                wallObject.GetComponent<SpriteRenderer>().color = ColorsManager.LightGray.Transparent();
             }
         }
 
         playerTransform.position = GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3();
 
-        // Add some random enemies
-        var obj = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
-        obj.GetComponent<SpriteRenderer>().color = ColorsManager.Green.Transparent();
+        foreach(var enemy in enemies)
+        {
+            enemyPrefab.GetComponent<EnemyAI>().enemy = enemy;
+            enemyPrefab.GetComponent<SpriteRenderer>().color = ColorsManager.GetColor(enemy.color).Transparent();
+
+            // Add some random enemies
+            Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
+        }
+
         
-        obj = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
-        obj.GetComponent<SpriteRenderer>().color = ColorsManager.Green.Transparent();
+        
     }
 
     Room GetRandomRoom(List<Room> rooms)

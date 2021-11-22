@@ -75,15 +75,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1368021755, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
-  m_Color: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 0.19215687}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 0.25490198, g: 0.54509807, b: 0.34117648, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &4859601161909702028
@@ -127,3 +127,5 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 384
+  enemy: {fileID: 11400000, guid: 27d3fe2267eba1f439942fd79469c9d8, type: 2}
+  sprites: {fileID: 4343727234628468602, guid: bc4538fdf008f304aa472fcf2d3e0d46, type: 2}

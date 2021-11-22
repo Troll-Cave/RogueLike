@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Extensions;
+using UnityEngine.U2D;
 
 public class EnemyAI : MonoBehaviour
 {
     public LayerMask layerMask;
+    public Enemy enemy;
+    public SpriteAtlas sprites;
 
     private bool moveOnUpdate = false;
 
     void Start()
     {
-        
+        GetComponent<SpriteRenderer>().sprite = sprites.GetSprite("rl_" + enemy.spriteLetter);
     }
 
     // Update is called once per frame
