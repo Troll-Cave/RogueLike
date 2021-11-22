@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         foreach (var fowCollider in fowColliders)
         {
             var renderer = fowCollider.GetComponent<SpriteRenderer>();
-            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1);
+            renderer.color = renderer.color.Opaque();
 
             if (renderer.gameObject.name.StartsWith("Floor"))
             {

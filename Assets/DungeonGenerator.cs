@@ -115,6 +115,7 @@ public class DungeonGenerator : MonoBehaviour
         foreach (var entry in map)
         {
             var floor = Instantiate(floorPrefab, entry.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
+            floor.GetComponent<SpriteRenderer>().color = ColorsManager.DarkGray.Transparent();
 
 
             if (UnityEngine.Random.Range(0, 5) == 0)
@@ -150,9 +151,8 @@ public class DungeonGenerator : MonoBehaviour
             var index = wall.GetWallTileIndex();
             if (index.HasValue)
             {
-                Instantiate(wallPrefab, wall.position.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
-
-                
+                var wallObject = Instantiate(wallPrefab, wall.position.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
+                wallObject.GetComponent<SpriteRenderer>().color = ColorsManager.LightGray.Transparent();
             }
         }
 
@@ -160,10 +160,10 @@ public class DungeonGenerator : MonoBehaviour
 
         // Add some random enemies
         var obj = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
-        obj.GetComponent<SpriteRenderer>().color = new Color32(65, 139, 87, 0);
+        obj.GetComponent<SpriteRenderer>().color = ColorsManager.Green.Transparent();
         
         obj = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
-        obj.GetComponent<SpriteRenderer>().color = new Color32(65, 139, 87, 0);
+        obj.GetComponent<SpriteRenderer>().color = ColorsManager.Green.Transparent();
     }
 
     Room GetRandomRoom(List<Room> rooms)
