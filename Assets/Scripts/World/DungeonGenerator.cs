@@ -22,6 +22,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private Tile tile;
     private List<Sprite> brokenFloors = new List<Sprite>();
+    private List<Sprite> brokenWalls = new List<Sprite>();
 
     private const int maxMapSize = 20;
 
@@ -88,7 +89,11 @@ public class DungeonGenerator : MonoBehaviour
         {
             brokenFloors.Add(atlas.GetSprite("rl_floor_broken_" + (i + 1)));
         }
-        
+
+        for (var i = 0; i < 2; i++)
+        {
+            brokenWalls.Add(atlas.GetSprite("rl_wall_broken_" + (i + 1)));
+        }
 
         wallTile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
         wallTile.sprite = atlas.GetSprite("rl_wall");

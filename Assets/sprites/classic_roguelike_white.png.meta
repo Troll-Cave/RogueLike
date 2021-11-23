@@ -4156,6 +4156,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: rl_selected_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 087f92f2bcc86f14db55a6e53dda05a1
+      internalID: 1177723545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rl_selected_2
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e531d0fc84a8f15459a533ab17448f06
+      internalID: -998605642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rl_wall_broken_1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab4857403d0faec42a9dceedc8e95923
+      internalID: 1383761359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rl_wall_broken_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7a7aff09dcb9a44cab8bcf445a0b410
+      internalID: 229805262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: classic_roguelike_white_46
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50f713e9e1242e44bb40f39e8b79322b
+      internalID: -1433877008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -4191,6 +4296,7 @@ TextureImporter:
       classic_roguelike_white_161: 2069400600
       classic_roguelike_white_32: 193924626
       classic_roguelike_white_55: 1296732094
+      classic_roguelike_white_46: -1433877008
       classic_roguelike_white_182: -711854853
       classic_roguelike_white_156: -651951603
       classic_roguelike_white_175: -1603718696
@@ -4241,6 +4347,7 @@ TextureImporter:
       classic_roguelike_white_157: -1700457073
       classic_roguelike_white_104: 1546663246
       classic_roguelike_white_67: 1119188200
+      rl_wall_broken_1: 1383761359
       classic_roguelike_white_121: 762988607
       classic_roguelike_white_147: -73840228
       classic_roguelike_white_186: -2060193870
@@ -4279,6 +4386,7 @@ TextureImporter:
       classic_roguelike_white_150: 793645092
       rl_me: 1865434070
       classic_roguelike_white_0: 1839191896
+      rl_wall_broken_2: 229805262
       classic_roguelike_white_184: 397880782
       classic_roguelike_white_149: -1709341848
       classic_roguelike_white_178: 565515510
@@ -4316,6 +4424,7 @@ TextureImporter:
       classic_roguelike_white_39: 1194275359
       classic_roguelike_white_90: -2125172233
       classic_roguelike_white_119: -596546611
+      rl_selected_1: 1177723545
       classic_roguelike_white_70: -325455728
       classic_roguelike_white_41: 1848115765
       classic_roguelike_white_82: 739891037
@@ -4337,6 +4446,7 @@ TextureImporter:
       classic_roguelike_white_168: 1831486111
       classic_roguelike_white_181: -1448584198
       classic_roguelike_white_117: 346953229
+      rl_selected_2: -998605642
       classic_roguelike_white_113: -894798696
       classic_roguelike_white_20: 1318923134
       classic_roguelike_white_85: -959085454

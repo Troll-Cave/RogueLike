@@ -31,9 +31,14 @@
                 <ui:Label text="Defense:" display-tooltip-when-elided="true" />
                 <ui:Label text="6 (+5)" display-tooltip-when-elided="true" name="defenseLabel" style="color: rgb(255, 255, 255);" />
             </ui:VisualElement>
+            <ui:VisualElement name="enemy" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Target:" display-tooltip-when-elided="true" />
+                <ui:Label text="Red Dragon" display-tooltip-when-elided="true" name="enemyLabel" style="color: rgb(174, 75, 103);" />
+            </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;" />
             <ui:Label text="Items" display-tooltip-when-elided="true" class="labelButton" />
-            <ui:Label text="Skills" display-tooltip-when-elided="true" class="labelButton" />
+            <ui:Label text="Skills" display-tooltip-when-elided="true" class="labelButton selected" />
+            <ui:Label text="Exit" display-tooltip-when-elided="true" class="labelButton" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

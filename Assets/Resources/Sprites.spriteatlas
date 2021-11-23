@@ -70,6 +70,7 @@ SpriteAtlas:
   - {fileID: -199185248, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 733727111, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -968540200, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: -1433877008, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1568870986, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1620127244, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1049256044, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -136,8 +137,10 @@ SpriteAtlas:
   - {fileID: -1837194095, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -596546611, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1831486111, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: 1383761359, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 175638387, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1757094929, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: 229805262, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 21929720, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1718161361, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 904936806, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -239,6 +242,8 @@ SpriteAtlas:
   - {fileID: -2104253326, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 762988607, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 588069956, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: -998605642, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: 1177723545, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1363121758, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 587469230, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -270377316, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -264,6 +269,7 @@ SpriteAtlas:
   - classic_roguelike_white_51
   - classic_roguelike_white_19
   - classic_roguelike_white_21
+  - classic_roguelike_white_46
   - classic_roguelike_white_50
   - classic_roguelike_white_18
   - classic_roguelike_white_26
@@ -330,8 +336,10 @@ SpriteAtlas:
   - classic_roguelike_white_151
   - classic_roguelike_white_119
   - classic_roguelike_white_168
+  - rl_wall_broken_1
   - classic_roguelike_white_109
   - classic_roguelike_white_189
+  - rl_wall_broken_2
   - classic_roguelike_white_108
   - classic_roguelike_white_192
   - classic_roguelike_white_188
@@ -433,6 +441,8 @@ SpriteAtlas:
   - classic_roguelike_white_122
   - classic_roguelike_white_121
   - classic_roguelike_white_120
+  - rl_selected_2
+  - rl_selected_1
   - classic_roguelike_white_17
   - classic_roguelike_white_16
   - classic_roguelike_white_15
