@@ -10,6 +10,9 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public PlayerInput playerInput;
+    public UIScript uIScript;
+
     private InputAction lookAction;
 
     private Vector3 toMove = Vector3.zero;
@@ -22,24 +25,24 @@ public class PlayerMovement : MonoBehaviour
     {
         combat = GetComponent<Combat>();
         combat.SetStats(10, 10, 10, 7, 6, 1);
+        
+        playerInput.actions["Click"].performed += Clicked;
+        playerInput.actions["Movement"].performed += DirectionalMove;
+        playerInput.actions["Scroll"].performed += Scroll;
 
-        GetComponent<PlayerInput>().actions["Click"].performed += Clicked;
-        GetComponent<PlayerInput>().actions["Movement"].performed += DirectionalMove;
-        GetComponent<PlayerInput>().actions["Scroll"].performed += Scroll;
+        playerInput.actions["Reload"].performed += reloadLol;
 
-        GetComponent<PlayerInput>().actions["Reload"].performed += reloadLol;
-
-        lookAction = GetComponent<PlayerInput>().actions["Look"];
+        lookAction = playerInput.actions["Look"];
         controller = GetComponent<PlayerController>();
     }
 
     private void OnDestroy()
     {
-        GetComponent<PlayerInput>().actions["Click"].performed -= Clicked;
-        GetComponent<PlayerInput>().actions["Movement"].performed -= DirectionalMove;
-        GetComponent<PlayerInput>().actions["Scroll"].performed -= Scroll;
+        /*playerInput.actions["Click"].performed -= Clicked;
+        playerInput.actions["Movement"].performed -= DirectionalMove;
+        playerInput.actions["Scroll"].performed -= Scroll;
 
-        GetComponent<PlayerInput>().actions["Reload"].performed -= reloadLol;
+        playerInput.actions["Reload"].performed -= reloadLol;*/
     }
 
     void reloadLol(InputAction.CallbackContext ctx)
@@ -66,6 +69,12 @@ public class PlayerMovement : MonoBehaviour
     // TODO: save the movement from the click and do it in a FixedUpdate
     void Clicked(InputAction.CallbackContext ctx)
     {
+        if (uIScript.inMenu)
+        {
+            // don't try to move in menu
+            return;
+        }
+
         // Get the current mouse position
         var pos = Camera.main.ScreenToWorldPoint(lookAction.ReadValue<Vector2>());
 
