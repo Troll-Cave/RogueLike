@@ -7,6 +7,8 @@ using Extensions;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -62,6 +64,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void DirectionalMove(InputAction.CallbackContext ctx)
     {
+        if (uIScript.inMenu || EventSystem.current.sendNavigationEvents == true)
+        {
+            return;
+        }
+
         Vector2 vector2 = ctx.ReadValue<Vector2>();
         toMove = gameObject.transform.position + (vector2.ToVector3() * 2).Clamp();
     }

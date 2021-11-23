@@ -2,13 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UIElements;
 
 public class UIScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public PlayerInput input;
+    public InputSystemUIInputModule inputSystem;
 
     public bool inMenu = false;
 
@@ -18,11 +21,6 @@ public class UIScript : MonoBehaviour
     // Used when you hit the back button
     private Button lastSelectedButton = null;
 
-    void Start()
-    {
-        
-    }
-
     private void OnEnable()
     {
         input.actions["Menu"].performed += OpenMenu;
@@ -31,11 +29,15 @@ public class UIScript : MonoBehaviour
     private void OpenMenu(InputAction.CallbackContext obj)
     {
         itemsButton.Focus();
+        EventSystem.current.sendNavigationEvents = true;
     }
 
     private void Awake()
     {
         mainUI = GetComponent<UIDocument>();
+        inputSystem = GetComponent<InputSystemUIInputModule>();
+
+        inputSystem.move = InputActionReference.Create(input.actions["Movement"]);
 
         itemsButton = mainUI.rootVisualElement.Query<Button>("itemsButton").First();
 
@@ -47,17 +49,25 @@ public class UIScript : MonoBehaviour
         {
             menu.RegisterCallback<MouseEnterEvent>(x => inMenu = true);
             menu.RegisterCallback<MouseLeaveEvent>(x => inMenu = false);
+            menu.RegisterCallback<NavigationCancelEvent>(navCancel);
         }
 
         mainUI.rootVisualElement.RegisterCallback<NavigationMoveEvent>(navMove);
-        mainUI.rootVisualElement.RegisterCallback<NavigationCancelEvent>(navCancel);
 
         mainUI.rootVisualElement.Query<Button>("exitButton").First().clicked += exitClicked;
-        //mainUI.rootVisualElement.Query<Button>("exitButton").First().RegisterCallback<ClickEvent>(exitClicked, TrickleDown.NoTrickleDown);
     }
 
     private void navCancel(NavigationCancelEvent evt)
     {
+        // On cancel we get rid of menus and kill navigation events
+        EventSystem.current.sendNavigationEvents = false;
+        var btn = evt.target as Button;
+
+        if (btn != null)
+        {
+            btn.Blur();
+        }
+
         var focussedButton = mainUI.rootVisualElement.focusController.focusedElement as Button;
         if (lastSelectedButton != null && lastSelectedButton == focussedButton)
         {
