@@ -15,10 +15,14 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 toMove = Vector3.zero;
     private PlayerController controller;
 
+    private Combat combat;
 
     // Start is called before the first frame update
     void Start()
     {
+        combat = GetComponent<Combat>();
+        combat.SetStats(10, 10, 10, 7, 6, 1);
+
         GetComponent<PlayerInput>().actions["Click"].performed += Clicked;
         GetComponent<PlayerInput>().actions["Movement"].performed += DirectionalMove;
         GetComponent<PlayerInput>().actions["Scroll"].performed += Scroll;
@@ -27,8 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
         lookAction = GetComponent<PlayerInput>().actions["Look"];
         controller = GetComponent<PlayerController>();
-
-        
     }
 
     private void OnDestroy()

@@ -23,7 +23,7 @@ public class DungeonGenerator : MonoBehaviour
     private Tile tile;
     private List<Sprite> brokenFloors = new List<Sprite>();
 
-    private const int maxMapSize = 10;
+    private const int maxMapSize = 20;
 
     private Tile wallTile;
 

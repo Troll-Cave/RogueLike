@@ -1,0 +1,39 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainStyles.uss?fileID=7433441132597879392&amp;guid=68e2a9658ac968246b662224022388b0&amp;type=3#MainStyles" />
+    <ui:VisualElement name="MainBorder" style="border-left-width: 8px; border-right-width: 8px; border-top-width: 8px; border-bottom-width: 8px; flex-shrink: initial; flex-grow: 1; border-left-color: rgb(62, 60, 66); border-right-color: rgb(62, 60, 66); border-top-color: rgb(62, 60, 66); border-bottom-color: rgb(62, 60, 66); position: absolute; width: 100%; height: 100%;" />
+    <ui:VisualElement name="menuContainer" style="flex-grow: 1;">
+        <ui:VisualElement name="Overlay" style="position: absolute; width: auto; height: 100%; border-left-color: rgb(62, 60, 66); border-right-color: rgb(62, 60, 66); border-top-color: rgb(62, 60, 66); border-bottom-color: rgb(62, 60, 66); border-left-width: 8px; border-right-width: 8px; border-top-width: 8px; border-bottom-width: 8px; -unity-font: url(&apos;project://database/Assets/Minecraft.ttf?fileID=12800000&amp;guid=24736c795cdc23243b44752cbeb329af&amp;type=3#Minecraft&apos;); -unity-font-definition: url(&apos;project://database/Assets/Minecraft%20SDF.asset?fileID=11400000&amp;guid=2b1061c318c917741b7c5f45042d86a0&amp;type=2#Minecraft SDF&apos;); color: rgb(255, 255, 255); font-size: 18px; padding-left: 6px; padding-right: 6px; padding-top: 6px; padding-bottom: 6px; background-color: rgb(0, 0, 0);">
+            <ui:VisualElement name="level" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Level:" display-tooltip-when-elided="true" />
+                <ui:Label text="1" display-tooltip-when-elided="true" name="levelLabel" style="color: rgb(240, 180, 158);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="health" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Health:" display-tooltip-when-elided="true" />
+                <ui:Label text="8/13" display-tooltip-when-elided="true" name="healthLabel" style="color: rgb(174, 75, 103);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="mana" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Mana:" display-tooltip-when-elided="true" />
+                <ui:Label text="10/10" display-tooltip-when-elided="true" name="manaLabel" style="color: rgb(76, 96, 135);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="strength" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Strength:" display-tooltip-when-elided="true" />
+                <ui:Label text="10 (+1)" display-tooltip-when-elided="true" name="strengthLabel" style="color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="dexterity" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Dexterity:" display-tooltip-when-elided="true" />
+                <ui:Label text="8 (-2)" display-tooltip-when-elided="true" name="dexterityLabel" style="color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="knowledge" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Knowledge:" display-tooltip-when-elided="true" />
+                <ui:Label text="6" display-tooltip-when-elided="true" name="knowledgeLabel" style="color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="defense" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Defense:" display-tooltip-when-elided="true" />
+                <ui:Label text="6 (+5)" display-tooltip-when-elided="true" name="defenseLabel" style="color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;" />
+            <ui:Label text="Items" display-tooltip-when-elided="true" class="labelButton" />
+            <ui:Label text="Skills" display-tooltip-when-elided="true" class="labelButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
