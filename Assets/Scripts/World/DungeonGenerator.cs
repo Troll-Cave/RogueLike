@@ -165,8 +165,9 @@ public class DungeonGenerator : MonoBehaviour
 
         playerTransform.position = GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3();
 
-        foreach(var enemy in enemies)
+        for (var i = 0; i < 3; i++)
         {
+            var enemy = enemies.First(x => x.spriteLetter == "s");
             enemyPrefab.GetComponent<EnemyAI>().enemy = enemy;
             var e = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
             e.name = enemy.name;

@@ -12,9 +12,11 @@ public class PlayerController : MonoBehaviour
     public UIDocument mainUI;
 
     private Combat playerCombat;
+    private Inventory inventory;
 
     private void Awake()
     {
+        inventory = GetComponent<Inventory>();
         playerCombat = GetComponent<Combat>();
         playerCombat.updated = UpdateUI;
         playerCombat.SetStats(30, 10, 10, 7, 6, 1);
@@ -63,7 +65,15 @@ public class PlayerController : MonoBehaviour
             if (collider.gameObject.tag == "Enemies")
             {
                 var enemyTarget = collider.gameObject.GetComponent<Combat>();
-                playerCombat.Attack(enemyTarget, Stat.strength, 8);
+
+                if (inventory.MainWeaponSlot != null)
+                {
+                    playerCombat.Attack(enemyTarget, Stat.strength, inventory.MainWeaponSlot.maxHit);
+                }
+                else
+                {
+                    playerCombat.Attack(enemyTarget, Stat.strength, 1);
+                }
 
                 TurnManager.RunTurns(); // attacks are an action
                 return;
