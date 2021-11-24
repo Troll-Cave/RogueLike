@@ -7,5 +7,11 @@ public class Cleaner : MonoBehaviour
 {
     private void OnDestroy()
     {
+        
+    }
+
+    private void Awake()
+    {
+        //DestroyImmediate(gameObject);
     }
 }

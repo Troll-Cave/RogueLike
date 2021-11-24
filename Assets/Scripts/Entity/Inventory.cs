@@ -5,4 +5,5 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public Item MainWeaponSlot;
+    public bool HasLight;
 }

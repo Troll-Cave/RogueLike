@@ -59,8 +59,6 @@ public class UIScript : MonoBehaviour
         mainUI = GetComponent<UIDocument>();
         inputSystem = GetComponent<InputSystemUIInputModule>();
 
-        inputSystem.move = InputActionReference.Create(input.actions["Movement"]);
-
         itemsButton = mainUI.rootVisualElement.Query<Button>("itemsButton").First();
         ticker = mainUI.rootVisualElement.Query<Label>("statusText").First();
 

@@ -66,15 +66,6 @@ public class DungeonGenerator : MonoBehaviour
         
     }
 
-    private void Scroll(float v)
-    {
-        Camera.main.orthographicSize -= Mathf.Clamp(v, -2, 2);
-        if (Camera.main.orthographicSize < 0)
-        {
-            Camera.main.orthographicSize = 0;
-        }
-    }
-
     private void Awake()
     {
         enemies = Resources.LoadAll<Enemy>("Enemies/").ToList();

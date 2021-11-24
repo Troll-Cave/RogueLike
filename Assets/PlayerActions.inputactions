@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Scroll",
-                    "type": "Value",
-                    "id": "57f9767c-0186-418f-afdc-c5f942fa9e7e",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Reload",
                     "type": "Button",
                     "id": "62e6e1bb-6769-40df-90d3-7820929a1fdb",
@@ -164,17 +155,6 @@
                     "processors": "",
                     "groups": "keyboard",
                     "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f8aded2a-50f1-4ffe-beb1-3b87cb8f8437",
-                    "path": "<Mouse>/scroll/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "keyboard",
-                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

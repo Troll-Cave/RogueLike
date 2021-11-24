@@ -40,15 +40,42 @@ public class PlayerController : MonoBehaviour
 
     public void RevealFOW()
     {
-        var fowColliders = Physics2D.OverlapCircleAll(transform.position, 3, fowMask);
+        var overlapDistance = inventory.HasLight ? 3f : 2.4f;
+        var fowColliders = Physics2D.OverlapCircleAll(transform.position, overlapDistance, fowMask);
         foreach (var fowCollider in fowColliders)
         {
             var renderer = fowCollider.GetComponent<SpriteRenderer>();
-            renderer.color = renderer.color.Opaque();
+            var distance = Mathf.Round(Vector3.Distance(fowCollider.transform.position, transform.position));
 
-            if (renderer.gameObject.name.StartsWith("Floor"))
+            if (inventory.HasLight)
             {
-                Destroy(renderer.gameObject.GetComponent<BoxCollider2D>());
+                if (distance > 2 && fowCollider.gameObject.tag != "Enemies")
+                {
+                    renderer.color = renderer.color.WithAlpha(0.5f);
+                }
+                else
+                {
+                    renderer.color = renderer.color.Opaque();
+                }
+            }
+            else
+            {
+                if (distance > 1)
+                {
+                    if (fowCollider.gameObject.tag != "Enemies")
+                    {
+                        renderer.color = renderer.color.WithAlpha(0.5f);
+                    }
+                    else
+                    {
+                        // can't see enemies in the dark
+                        renderer.color = renderer.color.Transparent();
+                    }
+                }
+                else
+                {
+                    renderer.color = renderer.color.Opaque();
+                }
             }
         }
     }

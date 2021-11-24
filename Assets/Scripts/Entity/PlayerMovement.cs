@@ -9,8 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInput playerInput;
     public UIScript uIScript;
 
-    private InputAction lookAction;
-
     private Vector3 toMove = Vector3.zero;
     private PlayerController controller;
 
@@ -18,14 +16,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        playerInput.actions["Click"].performed -= Clicked;
+        playerInput.actions["Movement"].performed -= DirectionalMove;
+
         playerInput.actions["Click"].performed += Clicked;
         playerInput.actions["Movement"].performed += DirectionalMove;
-        playerInput.actions["Scroll"].performed += Scroll;
     }
 
     void Start()
     {
-        lookAction = playerInput.actions["Look"];
         controller = GetComponent<PlayerController>();
     }
 
@@ -35,23 +34,31 @@ public class PlayerMovement : MonoBehaviour
         {
             playerInput.actions["Click"].performed -= Clicked;
             playerInput.actions["Movement"].performed -= DirectionalMove;
-            playerInput.actions["Scroll"].performed -= Scroll;
         }
-        
+
+        uIScript = null;
+        playerInput = null;
     }
 
-    private void Scroll(InputAction.CallbackContext ctx)
+    private void OnDisable()
     {
-        float v = ctx.ReadValue<float>();
-        Camera.main.orthographicSize -= Mathf.Clamp(v, -2, 2);
-        if (Camera.main.orthographicSize < 0)
+        if (playerInput != null)
         {
-            Camera.main.orthographicSize = 0;
+            playerInput.actions["Click"].performed -= Clicked;
+            playerInput.actions["Movement"].performed -= DirectionalMove;
         }
     }
 
     private void DirectionalMove(InputAction.CallbackContext ctx)
     {
+        // remove ghost callback
+        if (this == null)
+        {
+            var obj = FindObjectOfType<PlayerInput>();
+            obj.actions["Movement"].performed -= DirectionalMove;
+            return;
+        }
+
         if (uIScript.inMenu || EventSystem.current.sendNavigationEvents == true)
         {
             return;
@@ -64,6 +71,14 @@ public class PlayerMovement : MonoBehaviour
     // TODO: save the movement from the click and do it in a FixedUpdate
     void Clicked(InputAction.CallbackContext ctx)
     {
+        // remove ghost callback
+        if (this == null)
+        {
+            var obj = FindObjectOfType<PlayerInput>();
+            obj.actions["Click"].performed -= DirectionalMove;
+            return;
+        }
+
         if (uIScript.inMenu || EventSystem.current.sendNavigationEvents == true)
         {
             // don't try to move in menu
@@ -71,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Get the current mouse position
-        var pos = Camera.main.ScreenToWorldPoint(lookAction.ReadValue<Vector2>());
+        var pos = Camera.main.ScreenToWorldPoint(playerInput.actions["Look"].ReadValue<Vector2>());
 
         // Clamp the difference
         var diff = (gameObject.transform.position - pos.Round().WithZ(0)).Clamp();
