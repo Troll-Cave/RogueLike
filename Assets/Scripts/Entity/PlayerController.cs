@@ -4,11 +4,13 @@ using UnityEngine;
 
 using Extensions;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public LayerMask fowMask;
     public LayerMask obsticals;
+    public LayerMask transitions;
     public UIDocument mainUI;
 
     private Combat playerCombat;
@@ -126,6 +128,12 @@ public class PlayerController : MonoBehaviour
         if (gameObject.transform.position != target)
         {
             gameObject.transform.position = target;
+
+            if (Physics2D.OverlapCircle(gameObject.transform.position, .1f, transitions))
+            {
+                TurnManager.messages.Clear();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+            }
 
             RevealFOW();
 

@@ -35,9 +35,6 @@ public class PlayerMovement : MonoBehaviour
             playerInput.actions["Click"].performed -= Clicked;
             playerInput.actions["Movement"].performed -= DirectionalMove;
         }
-
-        uIScript = null;
-        playerInput = null;
     }
 
     private void OnDisable()
@@ -54,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         // remove ghost callback
         if (this == null)
         {
+            Debug.LogWarning("Dangling callback");
             var obj = FindObjectOfType<PlayerInput>();
             obj.actions["Movement"].performed -= DirectionalMove;
             return;
@@ -74,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         // remove ghost callback
         if (this == null)
         {
+            Debug.LogWarning("Dangling callback");
             var obj = FindObjectOfType<PlayerInput>();
             obj.actions["Click"].performed -= DirectionalMove;
             return;

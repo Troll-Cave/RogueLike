@@ -1196,7 +1196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: classic_roguelike_white_52
+      name: rl_up
       rect:
         serializedVersion: 2
         x: 136
@@ -1217,7 +1217,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: classic_roguelike_white_53
+      name: dl_down
       rect:
         serializedVersion: 2
         x: 144
@@ -4318,7 +4318,6 @@ TextureImporter:
       classic_roguelike_white_34: -74786164
       classic_roguelike_white_165: -991150412
       classic_roguelike_white_109: 175638387
-      classic_roguelike_white_52: -1534967122
       classic_roguelike_white_56: 1947887221
       classic_roguelike_white_123: 952421450
       classic_roguelike_white_103: -764744702
@@ -4354,6 +4353,7 @@ TextureImporter:
       classic_roguelike_white_59: 902495325
       classic_roguelike_white_73: 1400715237
       classic_roguelike_white_10: 731866813
+      rl_up: -1534967122
       classic_roguelike_white_16: 587469230
       classic_roguelike_white_191: -583469304
       classic_roguelike_white_127: 189748355
@@ -4400,7 +4400,6 @@ TextureImporter:
       classic_roguelike_white_74: -1617057867
       classic_roguelike_white_91: -815196623
       classic_roguelike_white_183: -1635192838
-      classic_roguelike_white_53: 1502045942
       classic_roguelike_white_66: -1479355727
       classic_roguelike_white_88: 1533175945
       classic_roguelike_white_154: 1983958435
@@ -4454,6 +4453,7 @@ TextureImporter:
       classic_roguelike_white_76: 746522065
       classic_roguelike_white_120: 588069956
       classic_roguelike_white_176: -1367403703
+      dl_down: 1502045942
       classic_roguelike_white_190: -1346320160
       classic_roguelike_white_28: 553806812
       classic_roguelike_white_31: -82481813

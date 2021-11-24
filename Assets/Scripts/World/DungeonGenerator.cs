@@ -20,11 +20,13 @@ public class DungeonGenerator : MonoBehaviour
 
     public Transform playerTransform;
 
+    public Transform exitTransform;
+
     private Tile tile;
     private List<Sprite> brokenFloors = new List<Sprite>();
     private List<Sprite> brokenWalls = new List<Sprite>();
 
-    private const int maxMapSize = 20;
+    private const int maxMapSize = 10;
 
     private Tile wallTile;
 
@@ -58,12 +60,6 @@ public class DungeonGenerator : MonoBehaviour
         retval.Add(BottomRight);
 
         return retval;
-    }
-
-    private void Start()
-    {
-        //GetComponent<PlayerInput>().actions["Scroll"].performed += ctx => Scroll(ctx.ReadValue<float>());
-        
     }
 
     private void Awake()
@@ -111,10 +107,20 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
+        var exitPosition = GetRandomRoom(rooms).GetRandomPointInWorld();
+        exitTransform.position = exitPosition;
+
         foreach (var entry in map)
         {
             floorPrefab.GetComponent<SpriteRenderer>().color = ColorsManager.DarkGray.Transparent();
-            var floor = Instantiate(floorPrefab, entry.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
+
+            if (exitPosition == entry)
+            {
+                // don't place a floor tile here
+                continue;
+            }
+
+            var floor = Instantiate(floorPrefab, entry.ToVector3int(), Quaternion.identity);
 
             if (UnityEngine.Random.Range(0, 5) == 0)
             {
@@ -127,6 +133,7 @@ public class DungeonGenerator : MonoBehaviour
         var walls = new HashSet<Wall>();
 
         var relativeVectors = getRelativeVectors();
+        
 
         foreach (var floor in map)
         {
@@ -150,11 +157,12 @@ public class DungeonGenerator : MonoBehaviour
             if (index.HasValue)
             {
                 wallPrefab.GetComponent<SpriteRenderer>().color = ColorsManager.LightGray.Transparent();
-                var wallObject = Instantiate(wallPrefab, wall.position.ToVector3int() + Vector3.up + Vector3.right, Quaternion.identity);
+                var wallObject = Instantiate(wallPrefab, wall.position.ToVector3int(), Quaternion.identity);
             }
         }
 
         playerTransform.position = GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3();
+        
 
         for (var i = 0; i < 3; i++)
         {
@@ -569,7 +577,7 @@ public class DungeonGenerator : MonoBehaviour
         /// <returns></returns>
         public Vector2 GetRandomPointInWorld()
         {
-            return GetRandomPoint() + new Vector2(1, 1);
+            return GetRandomPoint();
         }
     }
 }
