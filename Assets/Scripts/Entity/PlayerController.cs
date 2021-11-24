@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask transitions;
     public UIDocument mainUI;
 
+    private uint experience;
     private Combat playerCombat;
     private Inventory inventory;
 
@@ -20,8 +21,24 @@ public class PlayerController : MonoBehaviour
     {
         inventory = GetComponent<Inventory>();
         playerCombat = GetComponent<Combat>();
+
+        if (DataManager.saveData == null)
+        {
+            DataManager.saveData = new SaveData();
+            
+            DataManager.saveData.stats = playerCombat.stats;
+            DataManager.saveData.effects = playerCombat.effects;
+
+            playerCombat.SetStats(30, 10, 10, 7, 6, 1);
+        }
+        else
+        {
+            playerCombat.stats = DataManager.saveData.stats;
+            playerCombat.effects = DataManager.saveData.effects;
+        }
+
         playerCombat.updated = UpdateUI;
-        playerCombat.SetStats(30, 10, 10, 7, 6, 1);
+        
         UpdateUI();
     }
 
@@ -32,6 +49,13 @@ public class PlayerController : MonoBehaviour
         mainUI.rootVisualElement.Query<Label>("dexterityLabel").First().text = playerCombat.GetStatForUI(Stat.dexterity);
         mainUI.rootVisualElement.Query<Label>("knowledgeLabel").First().text = playerCombat.GetStatForUI(Stat.knowledge);
         mainUI.rootVisualElement.Query<Label>("defenseLabel").First().text = playerCombat.GetStatForUI(Stat.defense);
+
+        // am I dead?
+        if (playerCombat.GetStat(Stat.health) < 1)
+        {
+            DataManager.saveData = null;
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update

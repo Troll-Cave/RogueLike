@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 2944
   enemy: {fileID: 11400000, guid: 27d3fe2267eba1f439942fd79469c9d8, type: 2}
   sprites: {fileID: 4343727234628468602, guid: bc4538fdf008f304aa472fcf2d3e0d46, type: 2}
   combat: {fileID: 0}

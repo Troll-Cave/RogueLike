@@ -24,6 +24,16 @@ public class EnemyAI : MonoBehaviour
         combat = gameObject.GetComponent<Combat>();
 
         combat.SetStats(enemy.health, enemy.mana, enemy.strength, enemy.dexterity, enemy.knowledge, enemy.defense);
+
+        combat.updated = CombatUpdated;
+    }
+
+    private void CombatUpdated()
+    {
+        if (combat.GetStat(Stat.health) < 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -36,7 +46,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (moveOnUpdate)
         {
-            Collider2D colliderplayer = Physics2D.OverlapCircle(transform.position, 3, LayerMask.GetMask("Player"));
+            Collider2D colliderplayer = Physics2D.OverlapCircle(transform.position, 4, LayerMask.GetMask("Player"));
 
             if (colliderplayer != null)
             {
@@ -71,11 +81,11 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if (Physics2D.OverlapCircle(targetX, .1f) == null)
+        if (Physics2D.OverlapCircle(targetX, .1f, layerMask) == null)
         {
             target = targetX;
         }
-        else if (Physics2D.OverlapCircle(targetY, .1f) == null)
+        else if (Physics2D.OverlapCircle(targetY, .1f, layerMask) == null)
         {
             target = targetY;
         }

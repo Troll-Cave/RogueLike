@@ -94,7 +94,7 @@ public class Combat : MonoBehaviour
         {
             var myColor = ColorUtility.ToHtmlStringRGBA(gameObject.GetComponent<SpriteRenderer>().color);
             TurnManager.AddMessage($"<color=#{myColor}>{name}</color> has died");
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
