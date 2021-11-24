@@ -7,4 +7,13 @@ public class Enemy : ScriptableObject
 {
     public string spriteLetter;
     public Colors color;
+
+    public int health;
+    public int mana;
+    public int strength;
+    public int dexterity;
+    public int knowledge;
+    public int defense;
+
+    public int maxHit;
 }

@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 1118320837
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -589393364, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  m_Sprite: {fileID: 1865434070, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   m_Color: {r: 0.9411765, g: 0.7058824, b: 0.61960787, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
+  uIScript: {fileID: 0}
 --- !u!114 &-4379617443619636122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +120,7 @@ MonoBehaviour:
   obsticals:
     serializedVersion: 2
     m_Bits: 951
+  mainUI: {fileID: 0}
 --- !u!61 &1218431450
 BoxCollider2D:
   m_ObjectHideFlags: 0

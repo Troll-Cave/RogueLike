@@ -1,14 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 using Extensions;
-using System;
-using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,34 +16,28 @@ public class PlayerMovement : MonoBehaviour
 
     private Combat combat;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        combat = GetComponent<Combat>();
-        combat.SetStats(10, 10, 10, 7, 6, 1);
-        
         playerInput.actions["Click"].performed += Clicked;
         playerInput.actions["Movement"].performed += DirectionalMove;
         playerInput.actions["Scroll"].performed += Scroll;
+    }
 
-        playerInput.actions["Reload"].performed += reloadLol;
-
+    void Start()
+    {
         lookAction = playerInput.actions["Look"];
         controller = GetComponent<PlayerController>();
     }
 
     private void OnDestroy()
     {
-        /*playerInput.actions["Click"].performed -= Clicked;
-        playerInput.actions["Movement"].performed -= DirectionalMove;
-        playerInput.actions["Scroll"].performed -= Scroll;
-
-        playerInput.actions["Reload"].performed -= reloadLol;*/
-    }
-
-    void reloadLol(InputAction.CallbackContext ctx)
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        if (playerInput != null)
+        {
+            playerInput.actions["Click"].performed -= Clicked;
+            playerInput.actions["Movement"].performed -= DirectionalMove;
+            playerInput.actions["Scroll"].performed -= Scroll;
+        }
+        
     }
 
     private void Scroll(InputAction.CallbackContext ctx)
@@ -76,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     // TODO: save the movement from the click and do it in a FixedUpdate
     void Clicked(InputAction.CallbackContext ctx)
     {
-        if (uIScript.inMenu)
+        if (uIScript.inMenu || EventSystem.current.sendNavigationEvents == true)
         {
             // don't try to move in menu
             return;

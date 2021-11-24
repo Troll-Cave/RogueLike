@@ -3,11 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Extensions;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     public LayerMask fowMask;
     public LayerMask obsticals;
+    public UIDocument mainUI;
+
+    private Combat playerCombat;
+
+    private void Awake()
+    {
+        playerCombat = GetComponent<Combat>();
+        playerCombat.updated = UpdateUI;
+        playerCombat.SetStats(30, 10, 10, 7, 6, 1);
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        mainUI.rootVisualElement.Query<Label>("healthLabel").First().text = $"{playerCombat.GetStat(Stat.health)}/{playerCombat.GetStat(Stat.maxHealth)}";
+        mainUI.rootVisualElement.Query<Label>("strengthLabel").First().text = playerCombat.GetStatForUI(Stat.strength);
+        mainUI.rootVisualElement.Query<Label>("dexterityLabel").First().text = playerCombat.GetStatForUI(Stat.dexterity);
+        mainUI.rootVisualElement.Query<Label>("knowledgeLabel").First().text = playerCombat.GetStatForUI(Stat.knowledge);
+        mainUI.rootVisualElement.Query<Label>("defenseLabel").First().text = playerCombat.GetStatForUI(Stat.defense);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,8 +62,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log(collider);
             if (collider.gameObject.tag == "Enemies")
             {
-                Debug.Log(collider.gameObject);
-                Destroy(collider.gameObject);
+                var enemyTarget = collider.gameObject.GetComponent<Combat>();
+                playerCombat.Attack(enemyTarget, Stat.strength, 8);
 
                 TurnManager.RunTurns(); // attacks are an action
                 return;

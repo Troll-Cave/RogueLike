@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteLetter: d
   color: 1
+  health: 5000
+  mana: 0
+  strength: 90
+  dexterity: 90
+  knowledge: 90
+  defense: 90
+  maxHit: 90

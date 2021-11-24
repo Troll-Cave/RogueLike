@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UIScript : MonoBehaviour
@@ -20,10 +21,31 @@ public class UIScript : MonoBehaviour
 
     // Used when you hit the back button
     private Button lastSelectedButton = null;
+    private Label ticker;
 
     private void OnEnable()
     {
         input.actions["Menu"].performed += OpenMenu;
+        input.actions["Reload"].performed += reloadLol;
+    }
+
+    private void Update()
+    {
+        ticker.text = string.Join(" - ", TurnManager.messages);
+    }
+
+    private void OnDestroy()
+    {
+        if (input != null)
+        {
+            input.actions["Reload"].performed -= reloadLol;
+        }
+    }
+
+    void reloadLol(InputAction.CallbackContext ctx)
+    {
+        TurnManager.messages.Clear();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
     private void OpenMenu(InputAction.CallbackContext obj)
@@ -40,6 +62,7 @@ public class UIScript : MonoBehaviour
         inputSystem.move = InputActionReference.Create(input.actions["Movement"]);
 
         itemsButton = mainUI.rootVisualElement.Query<Button>("itemsButton").First();
+        ticker = mainUI.rootVisualElement.Query<Label>("statusText").First();
 
         lastSelectedButton = itemsButton;
 

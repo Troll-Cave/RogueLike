@@ -31,7 +31,7 @@
                 <ui:Label text="Defense:" display-tooltip-when-elided="true" />
                 <ui:Label text="6 (+5)" display-tooltip-when-elided="true" name="defenseLabel" style="color: rgb(255, 255, 255);" />
             </ui:VisualElement>
-            <ui:VisualElement name="enemy" style="white-space: normal; flex-direction: row;">
+            <ui:VisualElement name="enemy" style="white-space: normal; flex-direction: row; display: none;">
                 <ui:Label text="Target:" display-tooltip-when-elided="true" />
                 <ui:Label text="Red Dragon" display-tooltip-when-elided="true" name="enemyLabel" style="color: rgb(174, 75, 103);" />
             </ui:VisualElement>
@@ -39,8 +39,10 @@
             <ui:Button text="Items" display-tooltip-when-elided="true" name="itemsButton" focusable="true" class="labelButton" />
             <ui:Button text="Exit" display-tooltip-when-elided="true" name="exitButton" focusable="true" class="labelButton" />
         </ui:VisualElement>
-        <ui:VisualElement class="menu">
-            <ui:Button text="Button" display-tooltip-when-elided="true" class="labelButton" />
+        <ui:VisualElement style="flex-grow: 1; -unity-font: url(&apos;project://database/Assets/Minecraft.ttf?fileID=12800000&amp;guid=24736c795cdc23243b44752cbeb329af&amp;type=3#Minecraft&apos;); -unity-font-definition: url(&apos;project://database/Assets/Minecraft%20SDF.asset?fileID=11400000&amp;guid=2b1061c318c917741b7c5f45042d86a0&amp;type=2#Minecraft SDF&apos;); font-size: 18px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; display: flex; visibility: visible;">
+            <ui:VisualElement name="statusContainer" style="border-left-color: rgb(62, 60, 66); border-right-color: rgb(62, 60, 66); border-top-color: rgb(62, 60, 66); border-bottom-color: rgb(62, 60, 66); border-right-width: 8px; border-top-width: 8px; border-bottom-width: 8px; background-color: rgb(0, 0, 0); padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px; font-size: 14px;">
+                <ui:Label text="Play the game!" display-tooltip-when-elided="true" name="statusText" style="color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

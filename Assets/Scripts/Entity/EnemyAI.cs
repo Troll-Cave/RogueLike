@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
     public LayerMask layerMask;
     public Enemy enemy;
     public SpriteAtlas sprites;
+    public Combat combat;
 
     private bool moveOnUpdate = false;
 
@@ -19,6 +20,10 @@ public class EnemyAI : MonoBehaviour
         
         // always start these guys transparent
         GetComponent<SpriteRenderer>().color = ColorsManager.GetColor(enemy.color).Transparent();
+
+        combat = gameObject.GetComponent<Combat>();
+
+        combat.SetStats(enemy.health, enemy.mana, enemy.strength, enemy.dexterity, enemy.knowledge, enemy.defense);
     }
 
     // Update is called once per frame
@@ -62,7 +67,7 @@ public class EnemyAI : MonoBehaviour
         if (playerPosition == target)
         {
             // Don't move into the player!
-            Debug.Log("HIT");
+            combat.Attack(colliderplayer.gameObject.GetComponent<Combat>(), Stat.strength, enemy.maxHit);
             return;
         }
 

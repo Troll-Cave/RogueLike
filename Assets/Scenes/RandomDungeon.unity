@@ -436,6 +436,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1478009326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478009323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f1f01407ab6894bb07b01f05456db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1872939004
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +494,7 @@ MonoBehaviour:
   m_ScrollWheelAction: {fileID: 1846295400672196803, guid: 10f41ba4db36dbf4c853806537bf9001, type: 3}
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
-  m_DeselectOnBackgroundClick: 1
+  m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
 --- !u!114 &1872939006
 MonoBehaviour:
@@ -552,6 +564,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4379617443619636122, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: mainUI
+      value: 
+      objectReference: {fileID: 1872939007}
     - target: {fileID: 7339228033840033636, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: m_Name
       value: Player
@@ -564,10 +580,6 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1478009324}
-    - target: {fileID: 7339228033840033656, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
-      propertyPath: inputDispatcher
-      value: 
-      objectReference: {fileID: 1478009323}
     - target: {fileID: 7339228033840033658, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: m_RootOrder
       value: 3
