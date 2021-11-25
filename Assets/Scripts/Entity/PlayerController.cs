@@ -5,17 +5,21 @@ using UnityEngine;
 using Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
     public LayerMask fowMask;
     public LayerMask obsticals;
     public LayerMask transitions;
+    public LayerMask walkable;
     public UIDocument mainUI;
 
     private uint experience;
     private Combat playerCombat;
     private Inventory inventory;
+
+    private List<SpriteRenderer> walkedOn = new List<SpriteRenderer>();
 
     private void Awake()
     {
@@ -47,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateUI()
     {
+        var healthLabel = mainUI.rootVisualElement.Query<Label>("healthLabel").First();
         mainUI.rootVisualElement.Query<Label>("healthLabel").First().text = $"{playerCombat.GetStat(Stat.health)}/{playerCombat.GetStat(Stat.maxHealth)}";
         mainUI.rootVisualElement.Query<Label>("strengthLabel").First().text = playerCombat.GetStatForUI(Stat.strength);
         mainUI.rootVisualElement.Query<Label>("dexterityLabel").First().text = playerCombat.GetStatForUI(Stat.dexterity);
@@ -164,7 +169,25 @@ public class PlayerController : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
 
-            
+            foreach (var hit in walkedOn)
+            {
+                hit.color = hit.color.Opaque();
+            }
+
+            walkedOn = Physics2D.OverlapCircleAll(gameObject.transform.position, 0.1f, walkable)
+                .Select(collider => collider.GetComponent<SpriteRenderer>())
+                .ToList();
+
+            foreach (var hit in walkedOn)
+            {
+                hit.color = hit.color.Transparent();
+            }
+
+            if (Physics2D.OverlapCircle(gameObject.transform.position, .1f, transitions))
+            {
+                TurnManager.messages.Clear();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+            }
 
             TurnManager.RunTurns();
         }

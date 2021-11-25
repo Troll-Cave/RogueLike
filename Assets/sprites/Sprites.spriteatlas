@@ -50,8 +50,6 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 219474750, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
-  - {fileID: 412142949, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 553806812, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 902495325, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -5300829, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -87,6 +85,7 @@ SpriteAtlas:
   - {fileID: -1038075628, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 193924626, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1502045942, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: -551475870, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -589393364, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1422115721, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1479355727, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -94,6 +93,7 @@ SpriteAtlas:
   - {fileID: 1368021755, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1484060031, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 15036077, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: 527825190, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -781940485, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1682041235, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -732535989, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -197,6 +197,8 @@ SpriteAtlas:
   - {fileID: -1958181469, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -2125172233, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1534967122, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: 412142949, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: 219474750, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1865434070, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1443028862, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 104014223, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -207,7 +209,6 @@ SpriteAtlas:
   - {fileID: 326321205, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1222779277, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -739089990, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
-  - {fileID: -551475870, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1431019976, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 717286425, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1380697885, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -217,7 +218,6 @@ SpriteAtlas:
   - {fileID: 1839191896, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1964869317, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -290928103, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
-  - {fileID: 527825190, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -976109924, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 555995490, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1965052066, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -249,8 +249,6 @@ SpriteAtlas:
   - {fileID: -270377316, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 914724010, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   m_PackedSpriteNamesToIndex:
-  - classic_roguelike_white_13
-  - classic_roguelike_white_12
   - classic_roguelike_white_28
   - classic_roguelike_white_59
   - classic_roguelike_white_11
@@ -286,6 +284,7 @@ SpriteAtlas:
   - classic_roguelike_white_33
   - classic_roguelike_white_32
   - dl_down
+  - rl_tree_1
   - rl_guy
   - rl_d
   - rl_snake
@@ -293,6 +292,7 @@ SpriteAtlas:
   - rl_s
   - classic_roguelike_white_170
   - classic_roguelike_white_171
+  - rl_grass
   - classic_roguelike_white_172
   - classic_roguelike_white_112
   - classic_roguelike_white_173
@@ -396,6 +396,8 @@ SpriteAtlas:
   - classic_roguelike_white_61
   - classic_roguelike_white_90
   - rl_up
+  - rl_water_1
+  - rl_water_2
   - rl_me
   - rl_floor_broken_3
   - rl_floor_broken_2
@@ -406,7 +408,6 @@ SpriteAtlas:
   - classic_roguelike_white_8
   - classic_roguelike_white_148
   - classic_roguelike_white_9
-  - classic_roguelike_white_4
   - classic_roguelike_white_5
   - classic_roguelike_white_6
   - classic_roguelike_white_138
@@ -416,7 +417,6 @@ SpriteAtlas:
   - classic_roguelike_white_0
   - classic_roguelike_white_1
   - classic_roguelike_white_143
-  - classic_roguelike_white_2
   - classic_roguelike_white_142
   - classic_roguelike_white_134
   - classic_roguelike_white_3

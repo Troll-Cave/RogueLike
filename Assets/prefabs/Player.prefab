@@ -121,6 +121,12 @@ MonoBehaviour:
   obsticals:
     serializedVersion: 2
     m_Bits: 951
+  transitions:
+    serializedVersion: 2
+    m_Bits: 0
+  walkable:
+    serializedVersion: 2
+    m_Bits: 64
   mainUI: {fileID: 0}
 --- !u!61 &1218431450
 BoxCollider2D:
@@ -172,5 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727b2890a11476b4b9283b458fc6011d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HelmetSlot: {fileID: 11400000, guid: ada1d25e3206b2d40bb9c883a4fed4cf, type: 2}
   MainWeaponSlot: {fileID: 11400000, guid: 395aa91c3ee445a4cae4ea8546c96c59, type: 2}
   HasLight: 1
+  fullness: 10

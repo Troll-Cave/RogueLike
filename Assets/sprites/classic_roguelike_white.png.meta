@@ -146,7 +146,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: classic_roguelike_white_2
+      name: rl_grass
       rect:
         serializedVersion: 2
         x: 16
@@ -188,7 +188,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: classic_roguelike_white_4
+      name: rl_tree_1
       rect:
         serializedVersion: 2
         x: 32
@@ -356,7 +356,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: classic_roguelike_white_12
+      name: rl_water_1
       rect:
         serializedVersion: 2
         x: 0
@@ -377,7 +377,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: classic_roguelike_white_13
+      name: rl_water_2
       rect:
         serializedVersion: 2
         x: 8
@@ -4285,12 +4285,11 @@ TextureImporter:
       classic_roguelike_white_7: 1861981584
       classic_roguelike_white_81: 638909696
       classic_roguelike_white_159: -1317091316
-      classic_roguelike_white_2: 527825190
+      rl_wall: -1801768924
       classic_roguelike_white_99: -1890460774
       classic_roguelike_white_151: -1837194095
       classic_roguelike_white_40: 692212136
       classic_roguelike_white_97: 1440956635
-      rl_wall: -1801768924
       rl_floor_broken_3: -1443028862
       classic_roguelike_white_42: -1232269174
       classic_roguelike_white_161: 2069400600
@@ -4321,7 +4320,6 @@ TextureImporter:
       classic_roguelike_white_56: 1947887221
       classic_roguelike_white_123: 952421450
       classic_roguelike_white_103: -764744702
-      classic_roguelike_white_4: -551475870
       classic_roguelike_white_95: -390370177
       classic_roguelike_white_129: -138669063
       classic_roguelike_white_27: 571496753
@@ -4342,6 +4340,7 @@ TextureImporter:
       classic_roguelike_white_114: -1613876181
       classic_roguelike_white_189: -1757094929
       classic_roguelike_white_61: -1958181469
+      rl_water_1: 412142949
       classic_roguelike_white_60: -82522177
       classic_roguelike_white_157: -1700457073
       classic_roguelike_white_104: 1546663246
@@ -4363,7 +4362,6 @@ TextureImporter:
       classic_roguelike_white_139: -1279653273
       classic_roguelike_white_71: -1179735573
       classic_roguelike_white_11: -5300829
-      classic_roguelike_white_12: 412142949
       classic_roguelike_white_185: 1396850841
       classic_roguelike_white_135: -326846978
       classic_roguelike_white_187: 1226099340
@@ -4388,8 +4386,9 @@ TextureImporter:
       classic_roguelike_white_0: 1839191896
       rl_wall_broken_2: 229805262
       classic_roguelike_white_184: 397880782
-      classic_roguelike_white_149: -1709341848
       rl_snake: -1479355727
+      classic_roguelike_white_149: -1709341848
+      rl_water_2: 219474750
       classic_roguelike_white_178: 565515510
       classic_roguelike_white_122: -2104253326
       classic_roguelike_white_160: -155196159
@@ -4406,10 +4405,9 @@ TextureImporter:
       classic_roguelike_white_154: 1983958435
       classic_roguelike_white_111: -175364905
       classic_roguelike_white_62: 1843974054
-      classic_roguelike_white_13: 219474750
+      rl_d: -1422115721
       classic_roguelike_white_8: 326321205
       classic_roguelike_white_144: 1221964794
-      rl_d: -1422115721
       classic_roguelike_white_98: -1474006487
       classic_roguelike_white_167: -185450273
       classic_roguelike_white_29: -1476119104
@@ -4464,12 +4462,14 @@ TextureImporter:
       classic_roguelike_white_133: 1941067073
       classic_roguelike_white_112: 1682041235
       classic_roguelike_white_77: 1845465253
+      rl_tree_1: -551475870
       classic_roguelike_white_118: 1001241900
       classic_roguelike_white_3: 1965052066
       classic_roguelike_white_64: 1299593275
       classic_roguelike_white_158: 1207965302
       classic_roguelike_white_93: -685718807
       classic_roguelike_white_30: 2122681556
+      rl_grass: 527825190
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
