@@ -14,6 +14,12 @@ public static class DataManager
 
     }
 
+    // load the game
+    static DataManager()
+    {
+
+    }
+
     public static void Load()
     {
 
