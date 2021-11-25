@@ -609,6 +609,10 @@ PrefabInstance:
       propertyPath: transitions.m_Bits
       value: 2048
       objectReference: {fileID: 0}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: HelmetSlot
+      value: 
+      objectReference: {fileID: 11400000, guid: ada1d25e3206b2d40bb9c883a4fed4cf, type: 2}
     - target: {fileID: 7339228033840033636, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: m_Name
       value: Player

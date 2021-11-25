@@ -23,8 +23,9 @@ public static class DataManager
 [Serializable]
 public class SaveData
 {
-    public uint experience { get; set; } = 1;
-    public ushort level { get; set; } = 1;
+    public int experience { get; set; } = 1;
+    public int level { get; set; } = 1;
+    public int fullness { get; set; } = 0;
     public Dictionary<Stat, int> stats { get; set; } = new Dictionary<Stat, int>();
     public List<Effect> effects { get; set; } = new List<Effect>();
 }

@@ -31,6 +31,10 @@
                 <ui:Label text="Defense:" display-tooltip-when-elided="true" />
                 <ui:Label text="6 (+5)" display-tooltip-when-elided="true" name="defenseLabel" style="color: rgb(255, 255, 255);" />
             </ui:VisualElement>
+            <ui:VisualElement name="fullness" style="white-space: normal; flex-direction: row;">
+                <ui:Label text="Fullness:" display-tooltip-when-elided="true" />
+                <ui:Label text="0" display-tooltip-when-elided="true" name="fullnessLabel" style="color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
             <ui:VisualElement name="enemy" style="white-space: normal; flex-direction: row; display: none;">
                 <ui:Label text="Target:" display-tooltip-when-elided="true" />
                 <ui:Label text="Red Dragon" display-tooltip-when-elided="true" name="enemyLabel" style="color: rgb(174, 75, 103);" />

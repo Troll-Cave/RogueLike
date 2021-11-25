@@ -166,7 +166,7 @@ public class DungeonGenerator : MonoBehaviour
 
         for (var i = 0; i < 3; i++)
         {
-            var enemy = enemies.First(x => x.spriteLetter == "s");
+            var enemy = enemies.First(x => x.spriteLetter == "snake");
             enemyPrefab.GetComponent<EnemyAI>().enemy = enemy;
             var e = Instantiate(enemyPrefab, GetRandomRoom(rooms).GetRandomPointInWorld().ToVector3(), Quaternion.identity);
             e.name = enemy.name;

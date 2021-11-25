@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        // don't move if you're in the 
         if (uIScript.inMenu || EventSystem.current.sendNavigationEvents == true)
         {
             return;
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogWarning("Dangling callback");
             var obj = FindObjectOfType<PlayerInput>();
-            obj.actions["Click"].performed -= DirectionalMove;
+            obj.actions["Click"].performed -= Clicked;
             return;
         }
 

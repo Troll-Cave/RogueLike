@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 /// <summary>
 /// Handles turns!
+/// 
+/// Calmness happens after 4 turns out of combat
 /// </summary>
 public static class TurnManager
 {
@@ -13,13 +15,25 @@ public static class TurnManager
 
     private static List<EnemyAI> _list = new List<EnemyAI>();
 
-    public static event Action OnTurnEnd;
-
     public static List<string> messages = new List<string>();
+    private static int turn = 0;
+
+    private static int nextCalmTurn = 0;
 
     public static void RunTurns()
     {
+        turn++;
         _list.ForEach(ai => ai.MakeTurn());
+    }
+
+    public static void CombatHappened()
+    {
+        nextCalmTurn = turn + 6;
+    }
+
+    public static bool IsCalm()
+    {
+        return turn >= nextCalmTurn;
     }
 
     public static void Register(EnemyAI ai)

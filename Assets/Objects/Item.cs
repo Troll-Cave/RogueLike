@@ -21,5 +21,6 @@ public struct StatChange
 public enum EquipSlot
 {
     none,
-    mainWeapon
+    mainWeapon,
+    helmet
 }

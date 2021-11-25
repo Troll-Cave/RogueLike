@@ -15,6 +15,11 @@ public class Combat : MonoBehaviour
     /// </summary>
     public Action updated;
 
+    public void AddEffect()
+    {
+
+    }
+
     public int GetStat(Stat stat)
     {
         if (!stats.ContainsKey(stat))
@@ -46,7 +51,7 @@ public class Combat : MonoBehaviour
                 modifierSymbol = "-";
             }
 
-            return $"{stats[stat] + modifier} ({modifierSymbol}${modifier})";
+            return $"{stats[stat] + modifier} ({modifierSymbol}{modifier})";
         }    
         else
         {
@@ -67,6 +72,8 @@ public class Combat : MonoBehaviour
 
     public void Attack(Combat target, Stat attackType, int maxHit)
     {
+        TurnManager.CombatHappened();
+
         var roll = UnityEngine.Random.Range(1, 20);
 
         var modifier = GetModifier(GetStat(attackType));
@@ -126,7 +133,7 @@ public enum Stat
     defense,
 }
 
-public class Effect
+public struct Effect
 {
     /// <summary>
     /// Key is used to uniquely identify effects
@@ -135,6 +142,21 @@ public class Effect
     public string description { get; set; }
     public Stat stat { get; set; }
     public int change { get; set; }
+    public EffectSource source { get; set; }
     public float expiration { get; set; }
 
+    public Effect(string key, string description, Stat stat, int change, EffectSource source = EffectSource.equipment, float expiration = 0)
+    {
+        this.key = key;
+        this.description = description;
+        this.stat = stat;
+        this.change = change;
+        this.expiration = expiration;
+        this.source = source;
+    }
+}
+
+public enum EffectSource
+{
+    equipment,
 }

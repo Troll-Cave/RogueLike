@@ -35,7 +35,10 @@ public class PlayerController : MonoBehaviour
         {
             playerCombat.stats = DataManager.saveData.stats;
             playerCombat.effects = DataManager.saveData.effects;
+            inventory.fullness = DataManager.saveData.fullness;
         }
+
+        inventory.UpdateStats(playerCombat);
 
         playerCombat.updated = UpdateUI;
         
@@ -49,6 +52,8 @@ public class PlayerController : MonoBehaviour
         mainUI.rootVisualElement.Query<Label>("dexterityLabel").First().text = playerCombat.GetStatForUI(Stat.dexterity);
         mainUI.rootVisualElement.Query<Label>("knowledgeLabel").First().text = playerCombat.GetStatForUI(Stat.knowledge);
         mainUI.rootVisualElement.Query<Label>("defenseLabel").First().text = playerCombat.GetStatForUI(Stat.defense);
+
+        mainUI.rootVisualElement.Query<Label>("fullnessLabel").First().text = inventory.fullness.ToString();
 
         // am I dead?
         if (playerCombat.GetStat(Stat.health) < 1)
@@ -159,10 +164,17 @@ public class PlayerController : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
 
-            RevealFOW();
+            
 
             TurnManager.RunTurns();
         }
-        
+
+        RevealFOW();
+        if (inventory.Eat(playerCombat))
+        {
+            UpdateUI();
+        }
     }
+
+
 }
