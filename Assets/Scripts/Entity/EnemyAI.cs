@@ -10,7 +10,7 @@ public class EnemyAI : MonoBehaviour
     public LayerMask layerMask;
     public Enemy enemy;
     public SpriteAtlas sprites;
-    public Combat combat;
+    private Combat combat;
 
     private bool moveOnUpdate = false;
 

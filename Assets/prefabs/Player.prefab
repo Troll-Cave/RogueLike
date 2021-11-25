@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fdb75b240996904eaee31720c0adc83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
+  dispatcher: {fileID: 0}
   uIScript: {fileID: 0}
 --- !u!114 &-4379617443619636122
 MonoBehaviour:
