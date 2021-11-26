@@ -9,6 +9,9 @@ public class Item : ScriptableObject
     public EquipSlot slot;
     public List<StatChange> statChanges;
     public int maxHit;
+
+    public bool stackable = false;
+    public int quantity = 1;
 }
 
 [Serializable]

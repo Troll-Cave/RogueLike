@@ -14,7 +14,20 @@ public class UIScript : MonoBehaviour
     public PlayerInput input;
     public InputSystemUIInputModule inputSystem;
 
-    public bool inMenu = false;
+    private List<string> activeMenus = new List<string>();
+
+    /// <summary>
+    /// Basically when you enter a menu it adds to the list and when
+    /// you leave it removes it from the list. Then we can just check
+    /// the menu count. Anything with the .menu class will be counted.
+    /// </summary>
+    public bool inMenu
+    {
+        get
+        {
+            return activeMenus.Count > 0;
+        }
+    }
 
     private UIDocument mainUI;
     private Button itemsButton;
@@ -68,8 +81,8 @@ public class UIScript : MonoBehaviour
 
         foreach(var menu in menus)
         {
-            menu.RegisterCallback<MouseEnterEvent>(x => inMenu = true);
-            menu.RegisterCallback<MouseLeaveEvent>(x => inMenu = false);
+            menu.RegisterCallback<MouseEnterEvent>(x => activeMenus.Add(menu.name));
+            menu.RegisterCallback<MouseLeaveEvent>(x => activeMenus.Remove(menu.name));
             menu.RegisterCallback<NavigationCancelEvent>(navCancel);
         }
 

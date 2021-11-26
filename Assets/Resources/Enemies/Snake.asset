@@ -21,3 +21,4 @@ MonoBehaviour:
   knowledge: 0
   defense: 7
   maxHit: 4
+  dropTable: {fileID: 11400000, guid: 5a467a0fee001014c80dd9106614762e, type: 2}

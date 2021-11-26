@@ -204,6 +204,7 @@ SpriteAtlas:
   - {fileID: 104014223, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1744772737, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 976048438, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
+  - {fileID: 952421450, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -576661388, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -1709341848, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 326321205, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -238,7 +239,6 @@ SpriteAtlas:
   - {fileID: -122585003, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -766043908, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 1941067073, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
-  - {fileID: 952421450, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: -2104253326, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 762988607, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
   - {fileID: 588069956, guid: b98ee2d1ab04b5643878636c852f8d8a, type: 3}
@@ -403,6 +403,7 @@ SpriteAtlas:
   - rl_floor_broken_2
   - rl_floor_broken_1
   - rl_floor_broken_4
+  - rl_comma
   - rl_floor
   - classic_roguelike_white_149
   - classic_roguelike_white_8
@@ -437,7 +438,6 @@ SpriteAtlas:
   - classic_roguelike_white_132
   - classic_roguelike_white_124
   - classic_roguelike_white_133
-  - classic_roguelike_white_123
   - classic_roguelike_white_122
   - classic_roguelike_white_121
   - classic_roguelike_white_120

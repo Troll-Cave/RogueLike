@@ -181,6 +181,13 @@ public class PlayerController : MonoBehaviour
             foreach (var hit in walkedOn)
             {
                 hit.color = hit.color.Transparent();
+
+                DropsHolder dropsHolder;
+
+                if (hit.TryGetComponent(out dropsHolder))
+                {
+                    Debug.Log("found " + string.Join(",", dropsHolder.items.Select(x => x.name).ToArray()));
+                }
             }
 
             if (Physics2D.OverlapCircle(gameObject.transform.position, .1f, transitions))
@@ -193,10 +200,8 @@ public class PlayerController : MonoBehaviour
         }
 
         RevealFOW();
-        if (inventory.Eat(playerCombat))
-        {
-            UpdateUI();
-        }
+
+        UpdateUI();
     }
 
 

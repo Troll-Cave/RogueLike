@@ -16,4 +16,6 @@ public class Enemy : ScriptableObject
     public int defense;
 
     public int maxHit;
+
+    public DropTable dropTable;
 }

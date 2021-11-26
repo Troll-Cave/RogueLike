@@ -32,6 +32,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (combat.GetStat(Stat.health) < 1)
         {
+            var drop = enemy.dropTable?.GetItem();
+            if (drop != null)
+            {
+                Debug.Log("Got " + drop.name);
+            }
+
             Destroy(gameObject);
         }
     }
