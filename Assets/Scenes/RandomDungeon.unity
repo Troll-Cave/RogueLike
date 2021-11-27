@@ -361,6 +361,10 @@ PrefabInstance:
       propertyPath: HelmetSlot
       value: 
       objectReference: {fileID: 11400000, guid: ada1d25e3206b2d40bb9c883a4fed4cf, type: 2}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: MainWeaponSlot.maxHit
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7339228033840033636, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: m_Name
       value: Player
@@ -428,6 +432,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7339228033840033658, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
   m_PrefabInstance: {fileID: 1890307963}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1890307965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+  m_PrefabInstance: {fileID: 1890307963}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727b2890a11476b4b9283b458fc6011d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &894010242410641740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -500,6 +515,14 @@ PrefabInstance:
       propertyPath: input
       value: 
       objectReference: {fileID: 1478009324}
+    - target: {fileID: 2455089944627811998, guid: 4540bf777095f674b86643e15a7e5422, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1890307965}
+    - target: {fileID: 2455089944627811998, guid: 4540bf777095f674b86643e15a7e5422, type: 3}
+      propertyPath: dispatcher
+      value: 
+      objectReference: {fileID: 1478009327}
     - target: {fileID: 2455089944627811999, guid: 4540bf777095f674b86643e15a7e5422, type: 3}
       propertyPath: m_RootOrder
       value: 4
