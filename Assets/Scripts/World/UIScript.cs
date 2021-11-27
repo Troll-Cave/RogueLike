@@ -13,6 +13,7 @@ public class UIScript : MonoBehaviour
     // Start is called before the first frame update
     public PlayerInput input;
     public InputSystemUIInputModule inputSystem;
+    public Inventory inventory;
 
     private List<string> activeMenus = new List<string>();
 
@@ -99,6 +100,51 @@ public class UIScript : MonoBehaviour
         mainUI.rootVisualElement.RegisterCallback<NavigationMoveEvent>(navMove);
 
         mainUI.rootVisualElement.Query<Button>("exitButton").First().clicked += exitClicked;
+        reloadInventory();
+
+        inventory.inventoryUpdated += reloadInventory;
+    }
+
+    /*
+     * <ui:VisualElement class="inventory-item">
+                        <ui:Label text="City Helmet (1)" display-tooltip-when-elided="true" class="small-box" />
+                        <ui:Button text="Equip" display-tooltip-when-elided="true" class="grab-button" />
+                        <ui:Button text="Drop" display-tooltip-when-elided="true" class="grab-button" />
+                    </ui:VisualElement>
+     */
+    private void reloadInventory()
+    {
+        var inventoryContainer = mainUI.rootVisualElement.Query<VisualElement>("inventoryContainer").First();
+        inventoryContainer.Clear();
+        
+        foreach (var item in inventory.Items)
+        {
+            var ve = new VisualElement();
+            ve.AddToClassList("inventory-item");
+
+            inventoryContainer.Add(ve);
+
+            var itemLabel = new Label()
+            {
+                text = $"{item.name} ({item.quantity})"
+            };
+
+            itemLabel.AddToClassList("small-box");
+
+            ve.Add(itemLabel);
+
+            if (item.slot != EquipSlot.none)
+            {
+                // this is equipable
+                var equipButton = new Button()
+                {
+                    text = "Equip"
+                };
+
+                equipButton.AddToClassList("grab-button");
+                ve.Add(equipButton);
+            }
+        }
     }
 
     private void navCancel(NavigationCancelEvent evt)

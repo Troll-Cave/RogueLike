@@ -14,6 +14,8 @@ public class Inventory : MonoBehaviour
     public bool HasLight;
     public int fullness = 10;
 
+    public event System.Action inventoryUpdated;
+
     public void UpdateStats(Combat combat)
     {
         // clear all combat effects
@@ -28,7 +30,27 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(InventoryItem item)
+    public void RemoveItem(InventoryItem item, bool sendUpdate = true)
+    {
+        Items.RemoveAll(x => x.name == item.name);
+
+        if (inventoryUpdated != null && sendUpdate)
+        {
+            inventoryUpdated();
+        }
+    }
+
+    public void EquipItem(InventoryItem item)
+    {
+        UnEquipItem(item.slot);
+    }
+    
+    public void UnEquipItem(EquipSlot slot)
+    {
+
+    }
+
+    public void AddItem(InventoryItem item, bool sendUpdate = true)
     {
         var currentItem = Items.FirstOrDefault(x => x.name == item.name);
 
@@ -39,6 +61,11 @@ public class Inventory : MonoBehaviour
         else
         {
             Items.Add(item);
+        }
+
+        if (inventoryUpdated != null && sendUpdate)
+        {
+            inventoryUpdated();
         }
     }
 

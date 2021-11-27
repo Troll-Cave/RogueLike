@@ -116,3 +116,7 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.inventory-item{
+    flex-direction: row;
+}

@@ -49,11 +49,11 @@
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1;" />
             <ui:VisualElement style="flex-direction: row;">
-                <ui:VisualElement name="inventoryContainer">
-                    <ui:VisualElement style="flex-direction: row;">
-                        <ui:Label text="Label" display-tooltip-when-elided="true" class="small-box" />
-                        <ui:Button text="Button" display-tooltip-when-elided="true" class="grab-button" />
-                        <ui:Button text="Button" display-tooltip-when-elided="true" class="grab-button" />
+                <ui:VisualElement name="inventoryContainer" class="menu">
+                    <ui:VisualElement class="inventory-item">
+                        <ui:Label text="City Helmet (1)" display-tooltip-when-elided="true" class="small-box" />
+                        <ui:Button text="Equip" display-tooltip-when-elided="true" class="grab-button" />
+                        <ui:Button text="Drop" display-tooltip-when-elided="true" class="grab-button" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
