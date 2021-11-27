@@ -42,12 +42,41 @@ public class Inventory : MonoBehaviour
 
     public void EquipItem(InventoryItem item)
     {
-        UnEquipItem(item.slot);
+        RemoveItem(item, false);
+        UnEquipItem(item.slot, false);
+
+        // put on the thing
+        if (item.slot == EquipSlot.helmet)
+        {
+            HelmetSlot = item;
+        }
+        else if (item.slot == EquipSlot.mainWeapon)
+        {
+            MainWeaponSlot = item;
+        }
+
+        if (inventoryUpdated != null)
+        {
+            inventoryUpdated();
+        }
     }
     
-    public void UnEquipItem(EquipSlot slot)
+    public void UnEquipItem(EquipSlot slot, bool sendUpdate = true)
     {
+        InventoryItem item = null;
 
+        if (slot == EquipSlot.helmet)
+        {
+            item = HelmetSlot;
+            HelmetSlot = null;
+        }
+        else if (slot == EquipSlot.mainWeapon)
+        {
+            item = MainWeaponSlot;
+            MainWeaponSlot = null;
+        }
+
+        Items.Add(item);
     }
 
     public void AddItem(InventoryItem item, bool sendUpdate = true)

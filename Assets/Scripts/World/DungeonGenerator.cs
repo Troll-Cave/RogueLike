@@ -66,8 +66,6 @@ public class DungeonGenerator : MonoBehaviour
     {
         enemies = Resources.LoadAll<Enemy>("Enemies/").ToList();
 
-        Debug.Log(enemies);
-
         tile = ScriptableObject.CreateInstance(typeof(Tile)) as Tile;
         tile.sprite = atlas.GetSprite("rl_floor");
         tile.color = new Color32(95, 87, 79, 0xff);
@@ -88,7 +86,6 @@ public class DungeonGenerator : MonoBehaviour
 
         var t = Time.realtimeSinceStartup;
         DrawMap();
-        Debug.Log(Time.realtimeSinceStartup - t);
     }
 
     private void DrawMap()

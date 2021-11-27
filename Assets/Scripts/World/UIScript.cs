@@ -74,6 +74,15 @@ public class UIScript : MonoBehaviour
         inputSystem = GetComponent<InputSystemUIInputModule>();
 
         itemsButton = mainUI.rootVisualElement.Query<Button>("itemsButton").First();
+
+        var inventoryContainer = mainUI.rootVisualElement.Query<VisualElement>("inventoryContainer").First();
+
+        itemsButton.clicked += () =>
+        {
+            inventoryContainer.visible = !inventoryContainer.visible;
+            itemsButton.Blur();
+        };
+
         ticker = mainUI.rootVisualElement.Query<Label>("statusText").First();
 
         lastSelectedButton = itemsButton;
@@ -84,13 +93,11 @@ public class UIScript : MonoBehaviour
         {
             menu.RegisterCallback<MouseEnterEvent>(x =>
             {
-                Debug.Log("mouse enter " + menu.name);
                 activeMenus.Add(menu.name);
             });
 
             menu.RegisterCallback<MouseLeaveEvent>(x =>
             {
-                Debug.Log("mouse exit " + menu.name);
                 activeMenus.RemoveAll(n => n == menu.name);
             });
 
@@ -143,6 +150,12 @@ public class UIScript : MonoBehaviour
 
                 equipButton.AddToClassList("grab-button");
                 ve.Add(equipButton);
+
+                equipButton.clicked += () =>
+                {
+                    equipButton.Blur();
+                    inventory.EquipItem(item);
+                };
             }
         }
     }
@@ -179,7 +192,6 @@ public class UIScript : MonoBehaviour
 
     private void exitClicked()
     {
-        Debug.Log("Exit Clicked");
         Application.Quit();
     }
 }

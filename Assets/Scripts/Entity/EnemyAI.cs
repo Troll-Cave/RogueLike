@@ -75,8 +75,6 @@ public class EnemyAI : MonoBehaviour
         var playerPosition = colliderplayer.gameObject.transform.position;
         var current = transform.position;
 
-        Debug.Log(current);
-
         var diff = (playerPosition - current).Clamp();
         var target = current + diff;
 

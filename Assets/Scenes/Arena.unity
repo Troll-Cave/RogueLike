@@ -785,6 +785,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1139714994}
     - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: HelmetSlot.name
+      value: ee
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: MainWeaponSlot.maxHit
       value: 10
       objectReference: {fileID: 0}
