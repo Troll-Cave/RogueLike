@@ -6,6 +6,7 @@ using Extensions;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private Inventory inventory;
 
     private List<SpriteRenderer> walkedOn = new List<SpriteRenderer>();
+
+    private List<Item> itemsOnFloor = new List<Item>();
 
     private void Awake()
     {
@@ -51,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateUI()
     {
-        var healthLabel = mainUI.rootVisualElement.Query<Label>("healthLabel").First();
         mainUI.rootVisualElement.Query<Label>("healthLabel").First().text = $"{playerCombat.GetStat(Stat.health)}/{playerCombat.GetStat(Stat.maxHealth)}";
         mainUI.rootVisualElement.Query<Label>("strengthLabel").First().text = playerCombat.GetStatForUI(Stat.strength);
         mainUI.rootVisualElement.Query<Label>("dexterityLabel").First().text = playerCombat.GetStatForUI(Stat.dexterity);
@@ -65,6 +67,52 @@ public class PlayerController : MonoBehaviour
         {
             DataManager.saveData = null;
             Destroy(gameObject);
+        }
+
+        var dropsContainer = mainUI.rootVisualElement.Query<VisualElement>("dropsContainer").First();
+        dropsContainer.Clear();
+
+        if (inventory.currentDrops.Count > 0)
+        {
+            dropsContainer.visible = true;
+            var dropsLabel = new Label()
+            {
+                text = "Drops"
+            };
+            dropsLabel.AddToClassList("items-text");
+            dropsContainer.Add(dropsLabel);
+
+            foreach (var item in inventory.currentDrops)
+            {
+                var btn = new Button()
+                {
+                    text = $"{item.name} ({item.quantity})",
+                };
+
+                btn.AddToClassList("grab-button");
+
+                btn.clicked += () =>
+                {
+                    inventory.currentDrops.Remove(item);
+                    
+                    inventory.AddItem(item);
+
+                    btn.Blur();
+
+                    var evnt = MouseLeaveEvent.GetPooled();
+                    evnt.target = dropsContainer;
+                    dropsContainer.SendEvent(evnt);
+
+                    UpdateUI();
+                };
+
+                dropsContainer.Add(btn);
+            }
+        }
+        else
+        {
+            // Send a mouse leave to remove focus in case it's captured
+            dropsContainer.visible = false;
         }
     }
 
@@ -171,12 +219,17 @@ public class PlayerController : MonoBehaviour
 
             foreach (var hit in walkedOn)
             {
-                hit.color = hit.color.Opaque();
+                if (hit != null) // this is magic
+                {
+                    hit.color = hit.color.Opaque();
+                }
             }
 
             walkedOn = Physics2D.OverlapCircleAll(gameObject.transform.position, 0.1f, walkable)
                 .Select(collider => collider.GetComponent<SpriteRenderer>())
                 .ToList();
+
+            itemsOnFloor = null;
 
             foreach (var hit in walkedOn)
             {
@@ -186,7 +239,8 @@ public class PlayerController : MonoBehaviour
 
                 if (hit.TryGetComponent(out dropsHolder))
                 {
-                    Debug.Log("found " + string.Join(",", dropsHolder.items.Select(x => x.name).ToArray()));
+                    // make a new copy
+                    itemsOnFloor = dropsHolder.items;
                 }
             }
 

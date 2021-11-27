@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public Item HelmetSlot;
-    public Item MainWeaponSlot;
+    public InventoryItem HelmetSlot;
+    public InventoryItem MainWeaponSlot;
+
+    public List<InventoryItem> Items = new List<InventoryItem>();
+    public List<InventoryItem> currentDrops = new List<InventoryItem>();
 
     public bool HasLight;
     public int fullness = 10;
@@ -22,7 +26,20 @@ public class Inventory : MonoBehaviour
                 combat.effects.Add(new Effect("helmet-" + changes.stat.ToString(), "Helmet", changes.stat, changes.change));
             }
         }
-        
+    }
+
+    public void AddItem(InventoryItem item)
+    {
+        var currentItem = Items.FirstOrDefault(x => x.name == item.name);
+
+        if (currentItem != null)
+        {
+            currentItem.quantity += item.quantity;
+        }
+        else
+        {
+            Items.Add(item);
+        }
     }
 
     /// <summary>

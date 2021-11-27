@@ -81,8 +81,18 @@ public class UIScript : MonoBehaviour
 
         foreach(var menu in menus)
         {
-            menu.RegisterCallback<MouseEnterEvent>(x => activeMenus.Add(menu.name));
-            menu.RegisterCallback<MouseLeaveEvent>(x => activeMenus.Remove(menu.name));
+            menu.RegisterCallback<MouseEnterEvent>(x =>
+            {
+                Debug.Log("mouse enter " + menu.name);
+                activeMenus.Add(menu.name);
+            });
+
+            menu.RegisterCallback<MouseLeaveEvent>(x =>
+            {
+                Debug.Log("mouse exit " + menu.name);
+                activeMenus.RemoveAll(n => n == menu.name);
+            });
+
             menu.RegisterCallback<NavigationCancelEvent>(navCancel);
         }
 

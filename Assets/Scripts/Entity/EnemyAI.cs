@@ -10,6 +10,9 @@ public class EnemyAI : MonoBehaviour
     public LayerMask layerMask;
     public Enemy enemy;
     public SpriteAtlas sprites;
+
+    public Inventory inventory;
+
     private Combat combat;
 
     private bool moveOnUpdate = false;
@@ -33,9 +36,9 @@ public class EnemyAI : MonoBehaviour
         if (combat.GetStat(Stat.health) < 1)
         {
             var drop = enemy.dropTable?.GetItem();
-            if (drop != null)
+            if (drop != null && inventory != null)
             {
-                Debug.Log("Got " + drop.name);
+                inventory.currentDrops.Add(drop.MakeItem());
             }
 
             Destroy(gameObject);

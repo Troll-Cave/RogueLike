@@ -47,8 +47,18 @@
             <ui:VisualElement name="statusContainer" style="border-left-color: rgb(62, 60, 66); border-right-color: rgb(62, 60, 66); border-top-color: rgb(62, 60, 66); border-bottom-color: rgb(62, 60, 66); border-right-width: 8px; border-top-width: 8px; border-bottom-width: 8px; background-color: rgb(0, 0, 0); padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px; font-size: 14px;">
                 <ui:Label text="Play the game!" display-tooltip-when-elided="true" name="statusText" style="color: rgb(255, 255, 255);" />
             </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1;" />
+            <ui:VisualElement style="flex-direction: row;">
+                <ui:VisualElement name="inventoryContainer">
+                    <ui:VisualElement style="flex-direction: row;">
+                        <ui:Label text="Label" display-tooltip-when-elided="true" class="small-box" />
+                        <ui:Button text="Button" display-tooltip-when-elided="true" class="grab-button" />
+                        <ui:Button text="Button" display-tooltip-when-elided="true" class="grab-button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement class="menu" style="position: absolute; right: 0; bottom: 0; padding-left: 4px; padding-right: 4px; padding-top: 4px; padding-bottom: 4px; font-size: 14px; -unity-font: url(&apos;project://database/Assets/Minecraft.ttf?fileID=12800000&amp;guid=24736c795cdc23243b44752cbeb329af&amp;type=3#Minecraft&apos;); -unity-font-definition: url(&apos;project://database/Assets/Minecraft%20SDF.asset?fileID=11400000&amp;guid=2b1061c318c917741b7c5f45042d86a0&amp;type=2#Minecraft SDF&apos;); color: rgb(255, 255, 255); border-left-width: 8px; border-right-width: 8px; border-top-width: 8px; border-bottom-width: 8px; border-bottom-color: rgb(62, 60, 66); border-left-color: rgb(62, 60, 66); border-right-color: rgb(62, 60, 66); border-top-color: rgb(62, 60, 66); background-color: rgb(0, 0, 0); flex-direction: column;">
+        <ui:VisualElement name="dropsContainer" class="menu" style="position: absolute; right: 0; bottom: 0; padding-left: 4px; padding-right: 4px; padding-top: 4px; padding-bottom: 4px; font-size: 14px; -unity-font: url(&apos;project://database/Assets/Minecraft.ttf?fileID=12800000&amp;guid=24736c795cdc23243b44752cbeb329af&amp;type=3#Minecraft&apos;); -unity-font-definition: url(&apos;project://database/Assets/Minecraft%20SDF.asset?fileID=11400000&amp;guid=2b1061c318c917741b7c5f45042d86a0&amp;type=2#Minecraft SDF&apos;); color: rgb(255, 255, 255); border-left-width: 8px; border-right-width: 8px; border-top-width: 8px; border-bottom-width: 8px; border-bottom-color: rgb(62, 60, 66); border-left-color: rgb(62, 60, 66); border-right-color: rgb(62, 60, 66); border-top-color: rgb(62, 60, 66); background-color: rgb(0, 0, 0); flex-direction: column;">
             <ui:Label text="Drops" display-tooltip-when-elided="true" class="item-text" />
             <ui:Button text="City Helmet (1)" display-tooltip-when-elided="true" class="grab-button" />
         </ui:VisualElement>
