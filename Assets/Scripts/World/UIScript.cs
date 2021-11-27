@@ -11,8 +11,7 @@ using UnityEngine.UIElements;
 public class UIScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public PlayerInput input;
-    public InputSystemUIInputModule inputSystem;
+    public InputDispatcher dispatcher;
     public Inventory inventory;
 
     private List<string> activeMenus = new List<string>();
@@ -37,12 +36,6 @@ public class UIScript : MonoBehaviour
     private Button lastSelectedButton = null;
     private Label ticker;
 
-    private void OnEnable()
-    {
-        input.actions["Menu"].performed += OpenMenu;
-        input.actions["Reload"].performed += reloadLol;
-    }
-
     private void Update()
     {
         ticker.text = string.Join(" - ", TurnManager.messages);
@@ -50,13 +43,15 @@ public class UIScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (input != null)
+        EventsDispatcher.inventoryUpdated -= reloadInventory;
+
+        if (dispatcher != null)
         {
-            input.actions["Reload"].performed -= reloadLol;
+            dispatcher.onReload -= reloadInventory;
         }
     }
 
-    void reloadLol(InputAction.CallbackContext ctx)
+    void reloadLol()
     {
         TurnManager.messages.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
@@ -70,8 +65,9 @@ public class UIScript : MonoBehaviour
 
     private void Awake()
     {
+        dispatcher.onReload += reloadLol;
+
         mainUI = GetComponent<UIDocument>();
-        inputSystem = GetComponent<InputSystemUIInputModule>();
 
         itemsButton = mainUI.rootVisualElement.Query<Button>("itemsButton").First();
 
@@ -109,7 +105,7 @@ public class UIScript : MonoBehaviour
         mainUI.rootVisualElement.Query<Button>("exitButton").First().clicked += exitClicked;
         reloadInventory();
 
-        inventory.inventoryUpdated += reloadInventory;
+        EventsDispatcher.inventoryUpdated += reloadInventory;
     }
 
     /*

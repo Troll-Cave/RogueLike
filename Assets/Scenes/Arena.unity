@@ -626,6 +626,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1659898437}
     - target: {fileID: 2455089944627811998, guid: 4540bf777095f674b86643e15a7e5422, type: 3}
+      propertyPath: dispatcher
+      value: 
+      objectReference: {fileID: 511591154}
+    - target: {fileID: 2455089944627811998, guid: 4540bf777095f674b86643e15a7e5422, type: 3}
       propertyPath: inputSystem
       value: 
       objectReference: {fileID: 1085479285}
@@ -789,6 +793,10 @@ PrefabInstance:
       value: ee
       objectReference: {fileID: 0}
     - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: HelmetSlot.slot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: MainWeaponSlot.maxHit
       value: 10
       objectReference: {fileID: 0}
@@ -937,6 +945,10 @@ PrefabInstance:
     - target: {fileID: 4859601161909702030, guid: 565d948cc0de4b6438afc625be644c6f, type: 3}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859601161909702030, guid: 565d948cc0de4b6438afc625be644c6f, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4859601161909702030, guid: 565d948cc0de4b6438afc625be644c6f, type: 3}
       propertyPath: m_WasSpriteAssigned

@@ -13,16 +13,15 @@ public class PlayerController : MonoBehaviour
     public LayerMask fowMask;
     public LayerMask obsticals;
     public LayerMask transitions;
-    public LayerMask walkable;
+
     public UIDocument mainUI;
+
 
     private uint experience;
     private Combat playerCombat;
     private Inventory inventory;
 
-    private List<SpriteRenderer> walkedOn = new List<SpriteRenderer>();
-
-    private List<Item> itemsOnFloor = new List<Item>();
+    private List<DropsHolder> dropsHolders = new List<DropsHolder>();
 
     private void Awake()
     {
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour
         var dropsContainer = mainUI.rootVisualElement.Query<VisualElement>("dropsContainer").First();
         dropsContainer.Clear();
 
-        if (inventory.currentDrops.Count > 0)
+        if (dropsHolders.Count > 0)
         {
             dropsContainer.visible = true;
             var dropsLabel = new Label()
@@ -82,31 +81,40 @@ public class PlayerController : MonoBehaviour
             dropsLabel.AddToClassList("items-text");
             dropsContainer.Add(dropsLabel);
 
-            foreach (var item in inventory.currentDrops)
+            foreach (var holder in dropsHolders)
             {
-                var btn = new Button()
+                foreach (var item in holder.items)
                 {
-                    text = $"{item.name} ({item.quantity})",
-                };
+                    var btn = new Button()
+                    {
+                        text = $"{item.name} ({item.quantity})",
+                    };
 
-                btn.AddToClassList("grab-button");
+                    btn.AddToClassList("grab-button");
 
-                btn.clicked += () =>
-                {
-                    inventory.currentDrops.Remove(item);
-                    
-                    inventory.AddItem(item);
+                    btn.clicked += () =>
+                    {
+                        holder.items.Remove(item);
 
-                    btn.Blur();
+                        inventory.AddItem(item.MakeItem());
 
-                    var evnt = MouseLeaveEvent.GetPooled();
-                    evnt.target = dropsContainer;
-                    dropsContainer.SendEvent(evnt);
+                        if (holder.items.Count == 0)
+                        {
+                            dropsHolders.Remove(holder);
+                            Destroy(holder.gameObject);
+                        }
 
-                    UpdateUI();
-                };
+                        btn.Blur();
 
-                dropsContainer.Add(btn);
+                        var evnt = MouseLeaveEvent.GetPooled();
+                        evnt.target = dropsContainer;
+                        dropsContainer.SendEvent(evnt);
+
+                        UpdateUI();
+                    };
+
+                    dropsContainer.Add(btn);
+                }
             }
         }
         else
@@ -218,33 +226,6 @@ public class PlayerController : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
 
-            foreach (var hit in walkedOn)
-            {
-                if (hit != null) // this is magic
-                {
-                    hit.color = hit.color.Opaque();
-                }
-            }
-
-            walkedOn = Physics2D.OverlapCircleAll(gameObject.transform.position, 0.1f, walkable)
-                .Select(collider => collider.GetComponent<SpriteRenderer>())
-                .ToList();
-
-            itemsOnFloor = null;
-
-            foreach (var hit in walkedOn)
-            {
-                hit.color = hit.color.Transparent();
-
-                DropsHolder dropsHolder;
-
-                if (hit.TryGetComponent(out dropsHolder))
-                {
-                    // make a new copy
-                    itemsOnFloor = dropsHolder.items;
-                }
-            }
-
             if (Physics2D.OverlapCircle(gameObject.transform.position, .1f, transitions))
             {
                 TurnManager.messages.Clear();
@@ -252,6 +233,10 @@ public class PlayerController : MonoBehaviour
             }
 
             TurnManager.RunTurns();
+
+            dropsHolders = Physics2D.OverlapCircleAll(transform.position, 0.1f, LayerMask.GetMask("Drops"))
+                .Select(x => x.GetComponent<DropsHolder>())
+                .ToList();
         }
 
         RevealFOW();

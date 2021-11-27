@@ -13,6 +13,8 @@ public class EnemyAI : MonoBehaviour
 
     public Inventory inventory;
 
+    public GameObject dropsPrefab;
+
     private Combat combat;
 
     private bool moveOnUpdate = false;
@@ -38,7 +40,8 @@ public class EnemyAI : MonoBehaviour
             var drop = enemy.dropTable?.GetItem();
             if (drop != null && inventory != null)
             {
-                inventory.currentDrops.Add(drop.MakeItem());
+                var dropHolder = Instantiate(dropsPrefab, transform.position, Quaternion.identity);
+                dropHolder.GetComponent<DropsHolder>().items.Add(drop);
             }
 
             Destroy(gameObject);

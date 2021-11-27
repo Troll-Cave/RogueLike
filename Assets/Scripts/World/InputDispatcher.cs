@@ -14,11 +14,33 @@ public class InputDispatcher : MonoBehaviour
     private List<Action<Vector2>> movementHandlers = new List<Action<Vector2>>();
     private List<Action<Vector2>> clickHandlers = new List<Action<Vector2>>();
 
+    public event Action onReload;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         playerInput.actions["Movement"].performed += HandleMovement;
         playerInput.actions["Click"].performed += HandleClicks;
+        playerInput.actions["Reload"].performed += handleReload;
+    }
+
+    private void OnDestroy()
+    {
+        // probably don't need this but why not
+        movementHandlers.Clear();
+
+        // this one *is* needed
+        playerInput.actions["Movement"].performed -= HandleMovement;
+        playerInput.actions["Click"].performed -= HandleClicks;
+        playerInput.actions["Reload"].performed -= handleReload;
+    }
+
+    private void handleReload(InputAction.CallbackContext obj)
+    {
+        if (onReload != null)
+        {
+            onReload();
+        }
     }
 
     private void HandleMovement(InputAction.CallbackContext obj)
@@ -56,15 +78,5 @@ public class InputDispatcher : MonoBehaviour
     public Vector2 GetLookPosition()
     {
         return Camera.main.ScreenToWorldPoint(playerInput.actions["Look"].ReadValue<Vector2>());
-    }
-
-    private void OnDestroy()
-    {
-        // probably don't need this but why not
-        movementHandlers.Clear();
-
-        // this one *is* needed
-        playerInput.actions["Movement"].performed -= HandleMovement;
-        playerInput.actions["Click"].performed -= HandleClicks;
     }
 }
