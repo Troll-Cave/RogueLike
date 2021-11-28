@@ -171,12 +171,6 @@ public class PlayerController : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
 
-            if (Physics2D.OverlapCircle(gameObject.transform.position, .1f, transitions))
-            {
-                TurnManager.messages.Clear();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-            }
-
             TurnManager.RunTurns();
 
             var dropsHolders = Physics2D.OverlapCircleAll(transform.position, 0.1f, LayerMask.GetMask("Drops"))
@@ -184,6 +178,9 @@ public class PlayerController : MonoBehaviour
                 .ToList();
 
             EventsDispatcher.dropsChanged(dropsHolders);
+
+            // 
+            inventory.Eat(playerCombat);
         }
 
         RevealFOW();
