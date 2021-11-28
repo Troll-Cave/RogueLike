@@ -12,7 +12,6 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> currentDrops = new List<InventoryItem>();
 
     public bool HasLight;
-    public int fullness = 10;
 
     public void UpdateStats(Combat combat)
     {
@@ -103,36 +102,5 @@ public class Inventory : MonoBehaviour
     /// </summary>
     /// <param name="combat"></param>
     /// <returns>Whether or not to reload the UI</returns>
-    public bool Eat(Combat combat)
-    {
-        if (fullness > 0 && TurnManager.IsCalm())
-        {
-            var maxHealth = combat.GetStat(Stat.maxHealth);
-            var health = combat.GetStat(Stat.health);
-
-            if (health >= maxHealth)
-            {
-                return false;
-            }
-
-            var maxHealAmount = maxHealth - health;
-
-            var healAmount = Mathf.Clamp(maxHealth / 10, 0, maxHealAmount);
-
-            health += healAmount;
-
-            TurnManager.AddMessage($"You heal for {healAmount}");
-
-            combat.stats[Stat.health] = health;
-
-            fullness--;
-
-            DataManager.saveData.fullness = fullness;
-
-            EventsDispatcher.statsChanged(combat);
-            return true;
-        }
-
-        return false;
-    }
+    
 }

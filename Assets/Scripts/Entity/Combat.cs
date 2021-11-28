@@ -68,6 +68,7 @@ public class Combat : MonoBehaviour
         stats[Stat.dexterity] = dexterity;
         stats[Stat.knowledge] = knowledge;
         stats[Stat.defense] = defense;
+        stats[Stat.fullness] = 10;
     }
 
     public void Attack(Combat target, Stat attackType, int maxHit)
@@ -131,6 +132,7 @@ public enum Stat
     dexterity,
     knowledge,
     defense,
+    fullness,
 }
 
 public struct Effect

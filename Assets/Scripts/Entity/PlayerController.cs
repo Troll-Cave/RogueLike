@@ -39,34 +39,56 @@ public class PlayerController : MonoBehaviour
         {
             playerCombat.stats = DataManager.saveData.stats;
             playerCombat.effects = DataManager.saveData.effects;
-            inventory.fullness = DataManager.saveData.fullness;
         }
 
         inventory.UpdateStats(playerCombat);
 
-        playerCombat.updated = UpdateUI;
-        
-        UpdateUI();
+        playerCombat.updated = combatUpdate;
+
+        EventsDispatcher.statsChanged(playerCombat);
     }
 
-    private void UpdateUI()
+    private void combatUpdate()
     {
-        mainUI.rootVisualElement.Query<Label>("healthLabel").First().text = $"{playerCombat.GetStat(Stat.health)}/{playerCombat.GetStat(Stat.maxHealth)}";
-        mainUI.rootVisualElement.Query<Label>("strengthLabel").First().text = playerCombat.GetStatForUI(Stat.strength);
-        mainUI.rootVisualElement.Query<Label>("dexterityLabel").First().text = playerCombat.GetStatForUI(Stat.dexterity);
-        mainUI.rootVisualElement.Query<Label>("knowledgeLabel").First().text = playerCombat.GetStatForUI(Stat.knowledge);
-        mainUI.rootVisualElement.Query<Label>("defenseLabel").First().text = playerCombat.GetStatForUI(Stat.defense);
-
-        mainUI.rootVisualElement.Query<Label>("fullnessLabel").First().text = inventory.fullness.ToString();
-
-        // am I dead?
         if (playerCombat.GetStat(Stat.health) < 1)
         {
             DataManager.saveData = null;
             Destroy(gameObject);
         }
+    }
 
-        
+    public void Eat()
+    {
+        var fullness = playerCombat.GetStat(Stat.fullness);
+
+        if (fullness > 0 && TurnManager.IsCalm())
+        {
+            var maxHealth = playerCombat.GetStat(Stat.maxHealth);
+            var health = playerCombat.GetStat(Stat.health);
+
+            if (health >= maxHealth)
+            {
+                return;
+            }
+
+            var maxHealAmount = maxHealth - health;
+
+            var healAmount = Mathf.Clamp(maxHealth / 10, 0, maxHealAmount);
+
+            health += healAmount;
+
+            TurnManager.AddMessage($"You heal for {healAmount}");
+
+            playerCombat.stats[Stat.health] = health;
+
+            fullness--;
+
+            DataManager.saveData.fullness = fullness;
+
+            playerCombat.stats[Stat.fullness] = fullness;
+
+            EventsDispatcher.statsChanged(playerCombat);
+        }
     }
 
     // Start is called before the first frame update
@@ -186,11 +208,12 @@ public class PlayerController : MonoBehaviour
             EventsDispatcher.dropsChanged(dropsHolders);
 
             // 
-            inventory.Eat(playerCombat);
+            Eat();
         }
 
         RevealFOW();
-        UpdateUI();
+
+        EventsDispatcher.statsChanged(playerCombat);
     }
 
 

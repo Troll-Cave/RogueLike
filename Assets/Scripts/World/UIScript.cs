@@ -45,6 +45,7 @@ public class UIScript : MonoBehaviour
     {
         EventsDispatcher.onInventoryUpdated -= reloadInventory;
         EventsDispatcher.onDropsChanged -= reloadDrops;
+        EventsDispatcher.onStatsChanged -= reloadStats;
 
         if (dispatcher != null)
         {
@@ -64,10 +65,21 @@ public class UIScript : MonoBehaviour
 
         EventsDispatcher.onInventoryUpdated += reloadInventory;
         EventsDispatcher.onDropsChanged += reloadDrops;
+        EventsDispatcher.onStatsChanged += reloadStats;
         Setup();
 
         reloadInventory();
         reloadDrops(new List<DropsHolder>());
+    }
+
+    private void reloadStats(Combat combat)
+    {
+        mainUI.rootVisualElement.Query<Label>("healthLabel").First().text = $"{combat.GetStat(Stat.health)}/{combat.GetStat(Stat.maxHealth)}";
+        mainUI.rootVisualElement.Query<Label>("strengthLabel").First().text = combat.GetStatForUI(Stat.strength);
+        mainUI.rootVisualElement.Query<Label>("dexterityLabel").First().text = combat.GetStatForUI(Stat.dexterity);
+        mainUI.rootVisualElement.Query<Label>("knowledgeLabel").First().text = combat.GetStatForUI(Stat.knowledge);
+        mainUI.rootVisualElement.Query<Label>("defenseLabel").First().text = combat.GetStatForUI(Stat.defense);
+        mainUI.rootVisualElement.Query<Label>("fullnessLabel").First().text = combat.GetStat(Stat.fullness).ToString();
     }
 
     private void reloadDrops(List<DropsHolder> dropsHolders)
