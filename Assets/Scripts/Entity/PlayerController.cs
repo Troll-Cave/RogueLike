@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour
     private Combat playerCombat;
     private Inventory inventory;
 
-    private List<DropsHolder> dropsHolders = new List<DropsHolder>();
-
     private void Awake()
     {
         inventory = GetComponent<Inventory>();
@@ -68,60 +66,7 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        var dropsContainer = mainUI.rootVisualElement.Query<VisualElement>("dropsContainer").First();
-        dropsContainer.Clear();
-
-        if (dropsHolders.Count > 0)
-        {
-            dropsContainer.visible = true;
-            var dropsLabel = new Label()
-            {
-                text = "Drops"
-            };
-            dropsLabel.AddToClassList("items-text");
-            dropsContainer.Add(dropsLabel);
-
-            foreach (var holder in dropsHolders)
-            {
-                foreach (var item in holder.items)
-                {
-                    var btn = new Button()
-                    {
-                        text = $"{item.name} ({item.quantity})",
-                    };
-
-                    btn.AddToClassList("grab-button");
-
-                    btn.clicked += () =>
-                    {
-                        holder.items.Remove(item);
-
-                        inventory.AddItem(item.MakeItem());
-
-                        if (holder.items.Count == 0)
-                        {
-                            dropsHolders.Remove(holder);
-                            Destroy(holder.gameObject);
-                        }
-
-                        btn.Blur();
-
-                        var evnt = MouseLeaveEvent.GetPooled();
-                        evnt.target = dropsContainer;
-                        dropsContainer.SendEvent(evnt);
-
-                        UpdateUI();
-                    };
-
-                    dropsContainer.Add(btn);
-                }
-            }
-        }
-        else
-        {
-            // Send a mouse leave to remove focus in case it's captured
-            dropsContainer.visible = false;
-        }
+        
     }
 
     // Start is called before the first frame update
@@ -234,9 +179,11 @@ public class PlayerController : MonoBehaviour
 
             TurnManager.RunTurns();
 
-            dropsHolders = Physics2D.OverlapCircleAll(transform.position, 0.1f, LayerMask.GetMask("Drops"))
+            var dropsHolders = Physics2D.OverlapCircleAll(transform.position, 0.1f, LayerMask.GetMask("Drops"))
                 .Select(x => x.GetComponent<DropsHolder>())
                 .ToList();
+
+            EventsDispatcher.dropsChanged(dropsHolders);
         }
 
         RevealFOW();

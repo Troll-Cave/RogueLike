@@ -44,6 +44,7 @@ public class UIScript : MonoBehaviour
     private void OnDestroy()
     {
         EventsDispatcher.onInventoryUpdated -= reloadInventory;
+        EventsDispatcher.onDropsChanged -= reloadDrops;
 
         if (dispatcher != null)
         {
@@ -61,6 +62,75 @@ public class UIScript : MonoBehaviour
     {
         dispatcher.onReload += reloadLol;
 
+        EventsDispatcher.onInventoryUpdated += reloadInventory;
+        EventsDispatcher.onDropsChanged += reloadDrops;
+        Setup();
+
+        reloadInventory();
+        reloadDrops(new List<DropsHolder>());
+    }
+
+    private void reloadDrops(List<DropsHolder> dropsHolders)
+    {
+        var dropsContainer = mainUI.rootVisualElement.Query<VisualElement>("dropsContainer").First();
+        dropsContainer.Clear();
+
+        if (dropsHolders.Count > 0)
+        {
+            dropsContainer.visible = true;
+            var dropsLabel = new Label()
+            {
+                text = "Drops"
+            };
+            dropsLabel.AddToClassList("items-text");
+            dropsContainer.Add(dropsLabel);
+
+            foreach (var holder in dropsHolders)
+            {
+                foreach (var item in holder.items)
+                {
+                    var btn = new Button()
+                    {
+                        text = $"{item.name} ({item.quantity})",
+                    };
+
+                    btn.AddToClassList("grab-button");
+
+                    btn.clicked += () =>
+                    {
+                        holder.items.Remove(item);
+
+                        inventory.AddItem(item.MakeItem());
+
+                        if (holder.items.Count == 0)
+                        {
+                            dropsHolders.Remove(holder);
+                            Destroy(holder.gameObject);
+                        }
+
+                        btn.Blur();
+
+                        var evnt = MouseLeaveEvent.GetPooled();
+                        evnt.target = dropsContainer;
+                        dropsContainer.SendEvent(evnt);
+
+                        // rerun the UI for drops
+                        EventsDispatcher.dropsChanged(dropsHolders);
+                    };
+
+                    dropsContainer.Add(btn);
+                }
+            }
+        }
+        else
+        {
+            // Send a mouse leave to remove focus in case it's captured
+            dropsContainer.visible = false;
+        }
+    }
+
+    private void Setup()
+    {
         mainUI = GetComponent<UIDocument>();
 
         itemsButton = mainUI.rootVisualElement.Query<Button>("itemsButton").First();
@@ -79,7 +149,7 @@ public class UIScript : MonoBehaviour
 
         var menus = mainUI.rootVisualElement.Query<VisualElement>(null, "menu").ToList();
 
-        foreach(var menu in menus)
+        foreach (var menu in menus)
         {
             menu.RegisterCallback<MouseEnterEvent>(x =>
             {
@@ -97,9 +167,6 @@ public class UIScript : MonoBehaviour
         mainUI.rootVisualElement.RegisterCallback<NavigationMoveEvent>(navMove);
 
         mainUI.rootVisualElement.Query<Button>("exitButton").First().clicked += exitClicked;
-        reloadInventory();
-
-        EventsDispatcher.onInventoryUpdated += reloadInventory;
     }
 
     private void reloadInventory()
