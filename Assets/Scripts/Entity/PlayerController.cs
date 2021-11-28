@@ -119,6 +119,8 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector3 target)
     {
+        // check it 
+        
         // TODO: Probably make this more efficient
         inventory.UpdateStats(playerCombat);
         var collider = Physics2D.OverlapCircle(target, .1f, obsticals);
@@ -127,8 +129,12 @@ public class PlayerController : MonoBehaviour
 
         if (collider != null)
         {
+            
             if (collider.gameObject.tag == "Enemies")
             {
+                // needed because the return statement
+                RevealFOW();
+
                 var enemyTarget = collider.gameObject.GetComponent<Combat>();
 
                 if (inventory.MainWeaponSlot != null)
@@ -184,7 +190,6 @@ public class PlayerController : MonoBehaviour
         }
 
         RevealFOW();
-
         UpdateUI();
     }
 
