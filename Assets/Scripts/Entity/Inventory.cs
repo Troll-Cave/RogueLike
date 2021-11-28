@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
 
         if (sendUpdate)
         {
-            EventsDispatcher.sendInventoryUpdated();
+            EventsDispatcher.inventoryUpdated();
         }
     }
 
@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
             MainWeaponSlot = item;
         }
 
-        EventsDispatcher.sendInventoryUpdated();
+        EventsDispatcher.inventoryUpdated();
     }
     
     public void UnEquipItem(EquipSlot slot, bool sendUpdate = true)
@@ -75,7 +75,7 @@ public class Inventory : MonoBehaviour
 
         if (sendUpdate)
         {
-            EventsDispatcher.sendInventoryUpdated();
+            EventsDispatcher.inventoryUpdated();
         }
     }
 
@@ -94,7 +94,7 @@ public class Inventory : MonoBehaviour
 
         if (sendUpdate)
         {
-            EventsDispatcher.sendInventoryUpdated();
+            EventsDispatcher.inventoryUpdated();
         }
     }
 

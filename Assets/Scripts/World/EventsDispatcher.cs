@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public static class EventsDispatcher
 {
-    public static event System.Action inventoryUpdated;
+    public static event Action onInventoryUpdated;
+    public static event Action<List<DropsHolder>> onDropsChanged;
+    public static event Action<Combat> onStatsChanged;
 
-    public static void sendInventoryUpdated()
+    public static void inventoryUpdated()
     {
-        inventoryUpdated?.Invoke();
+        onInventoryUpdated?.Invoke();
+    }
+
+    public static void dropsChanged(List<DropsHolder> holders)
+    {
+        onDropsChanged?.Invoke(holders);
+    }
+
+    public static void statsChanged(Combat combat)
+    {
+        onStatsChanged?.Invoke(combat);
     }
 }

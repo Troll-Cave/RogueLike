@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
         move = true;
     }
 
-    // TODO: save the movement from the click and do it in a FixedUpdate
     void Clicked(Vector2 pos)
     {
         // Clamp the difference

@@ -36,25 +36,25 @@ public class InputDispatcher : MonoBehaviour
 
     private void handleReload(InputAction.CallbackContext obj)
     {
-        if (onReload != null && !uiScript.inMenu)
+        if (!uiScript.inMenu)
         {
-            onReload();
+            onReload?.Invoke();
         }
     }
 
     private void HandleMovement(InputAction.CallbackContext obj)
     {
-        if (onMove != null && !uiScript.inMenu)
+        if (!uiScript.inMenu)
         {
-            onMove(obj.ReadValue<Vector2>());
+            onMove?.Invoke(obj.ReadValue<Vector2>());
         }
     }
 
     private void HandleClicks(InputAction.CallbackContext obj)
     {
-        if (onClick != null && !uiScript.inMenu)
+        if (!uiScript.inMenu)
         {
-            onClick(GetLookPosition());
+            onClick?.Invoke(GetLookPosition());
         }
     }
 

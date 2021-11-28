@@ -43,11 +43,11 @@ public class UIScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventsDispatcher.inventoryUpdated -= reloadInventory;
+        EventsDispatcher.onInventoryUpdated -= reloadInventory;
 
         if (dispatcher != null)
         {
-            dispatcher.onReload -= reloadInventory;
+            dispatcher.onReload -= reloadLol;
         }
     }
 
@@ -55,12 +55,6 @@ public class UIScript : MonoBehaviour
     {
         TurnManager.messages.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-    }
-
-    private void OpenMenu(InputAction.CallbackContext obj)
-    {
-        itemsButton.Focus();
-        EventSystem.current.sendNavigationEvents = true;
     }
 
     private void Awake()
@@ -105,7 +99,7 @@ public class UIScript : MonoBehaviour
         mainUI.rootVisualElement.Query<Button>("exitButton").First().clicked += exitClicked;
         reloadInventory();
 
-        EventsDispatcher.inventoryUpdated += reloadInventory;
+        EventsDispatcher.onInventoryUpdated += reloadInventory;
     }
 
     private void reloadInventory()
