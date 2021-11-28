@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        dispatcher.RegisterMovementHandler(DirectionalMove);
-        dispatcher.RegisterClickHandler(Clicked);
+        dispatcher.onMove += DirectionalMove;
+        dispatcher.onClick += Clicked;
     }
 
     void Start()
@@ -33,22 +33,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        dispatcher.onMove -= DirectionalMove;
+        dispatcher.onClick -= Clicked;
     }
 
     private void DirectionalMove(Vector2 vector2)
     {
-        // remove ghost callback
-        if (this == null)
-        {
-            Debug.LogWarning("Dangling callback");
-        }
-
-        // don't move if you're in the 
-        if (uIScript.inMenu || EventSystem.current.sendNavigationEvents == true)
-        {
-            return;
-        }
-
         toMove = gameObject.transform.position + (vector2.ToVector3() * 2).Clamp();
         move = true;
     }
@@ -56,12 +46,6 @@ public class PlayerMovement : MonoBehaviour
     // TODO: save the movement from the click and do it in a FixedUpdate
     void Clicked(Vector2 pos)
     {
-        if (uIScript.inMenu || EventSystem.current.sendNavigationEvents == true)
-        {
-            // don't try to move in menu
-            return;
-        }
-
         // Clamp the difference
         var diff = (gameObject.transform.position - pos.ToVector3().Round().WithZ(0)).Clamp();
 

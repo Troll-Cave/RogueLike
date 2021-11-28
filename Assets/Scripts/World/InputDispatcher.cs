@@ -11,10 +11,12 @@ public class InputDispatcher : MonoBehaviour
 {
     // Start is called before the first frame update
     private PlayerInput playerInput;
-    private List<Action<Vector2>> movementHandlers = new List<Action<Vector2>>();
-    private List<Action<Vector2>> clickHandlers = new List<Action<Vector2>>();
 
+    public event Action<Vector2> onClick;
+    public event Action<Vector2> onMove;
     public event Action onReload;
+
+    public UIScript uiScript;
 
     private void Awake()
     {
@@ -26,9 +28,6 @@ public class InputDispatcher : MonoBehaviour
 
     private void OnDestroy()
     {
-        // probably don't need this but why not
-        movementHandlers.Clear();
-
         // this one *is* needed
         playerInput.actions["Movement"].performed -= HandleMovement;
         playerInput.actions["Click"].performed -= HandleClicks;
@@ -37,7 +36,7 @@ public class InputDispatcher : MonoBehaviour
 
     private void handleReload(InputAction.CallbackContext obj)
     {
-        if (onReload != null)
+        if (onReload != null && !uiScript.inMenu)
         {
             onReload();
         }
@@ -45,33 +44,17 @@ public class InputDispatcher : MonoBehaviour
 
     private void HandleMovement(InputAction.CallbackContext obj)
     {
-        movementHandlers.ForEach(handler =>
+        if (onMove != null && !uiScript.inMenu)
         {
-            handler(obj.ReadValue<Vector2>());
-        });
+            onMove(obj.ReadValue<Vector2>());
+        }
     }
 
     private void HandleClicks(InputAction.CallbackContext obj)
     {
-        clickHandlers.ForEach(handler =>
+        if (onClick != null && !uiScript.inMenu)
         {
-            handler(GetLookPosition());
-        });
-    }
-
-    public void RegisterMovementHandler(Action<Vector2> handler)
-    {
-        if (!movementHandlers.Contains(handler))
-        {
-            movementHandlers.Add(handler);
-        }
-    }
-
-    public void RegisterClickHandler(Action<Vector2> handler)
-    {
-        if (!clickHandlers.Contains(handler))
-        {
-            clickHandlers.Add(handler);
+            onClick(GetLookPosition());
         }
     }
 
