@@ -108,13 +108,6 @@ public class UIScript : MonoBehaviour
         EventsDispatcher.inventoryUpdated += reloadInventory;
     }
 
-    /*
-     * <ui:VisualElement class="inventory-item">
-                        <ui:Label text="City Helmet (1)" display-tooltip-when-elided="true" class="small-box" />
-                        <ui:Button text="Equip" display-tooltip-when-elided="true" class="grab-button" />
-                        <ui:Button text="Drop" display-tooltip-when-elided="true" class="grab-button" />
-                    </ui:VisualElement>
-     */
     private void reloadInventory()
     {
         var inventoryContainer = mainUI.rootVisualElement.Query<VisualElement>("inventoryContainer").First();

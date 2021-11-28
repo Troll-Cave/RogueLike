@@ -38,7 +38,7 @@ public class EnemyAI : MonoBehaviour
         if (combat.GetStat(Stat.health) < 1)
         {
             var drop = enemy.dropTable?.GetItem();
-            if (drop != null && inventory != null)
+            if (drop != null)
             {
                 var dropHolder = Instantiate(dropsPrefab, transform.position, Quaternion.identity);
                 dropHolder.GetComponent<DropsHolder>().items.Add(drop);

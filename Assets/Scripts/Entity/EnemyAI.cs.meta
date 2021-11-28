@@ -3,7 +3,11 @@ guid: c7063e23664a40948946933f357a79ce
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - enemy: {instanceID: 0}
+  - sprites: {instanceID: 0}
+  - inventory: {instanceID: 0}
+  - dropsPrefab: {fileID: 5658173558058438354, guid: bdf59886db0553f4f85b26600ad4063e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
