@@ -19,7 +19,7 @@ public class Item : ScriptableObject
     /// </summary>
     public bool isConsumable
     {
-        get { return slot == EquipSlot.none && (statChanges?.Count ?? 0) > 0; }
+        get { return slot == EquipSlot.None && (statChanges?.Count ?? 0) > 0; }
     }
 }
 // TODO: move this somewhere else
@@ -27,7 +27,7 @@ public class Item : ScriptableObject
 public class ItemQuantity
 {
     public int quantity;
-    public Item Item;
+    public Item item;
 }
 
 [Serializable]
@@ -39,15 +39,15 @@ public struct StatChange
 
 public enum EquipSlot
 {
-    none,
-    mainWeapon,
-    offWeapon,
-    helmet,
-    chest,
-    legs,
-    gloves,
-    boots,
-    ammo,
-    ring,
-    neck,
+    None,
+    MainWeapon,
+    OffWeapon,
+    Helmet,
+    Chest,
+    Legs,
+    Gloves,
+    Boots,
+    Ammo,
+    Ring,
+    Neck,
 }

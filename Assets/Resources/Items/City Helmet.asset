@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bba434ca8027842b3d627bffede39a, type: 3}
   m_Name: City Helmet
   m_EditorClassIdentifier: 
-  slot: 2
+  slot: 3
   statChanges:
   - stat: 6
     change: 10
   maxHit: 0
+  stackable: 0
+  quantity: 1

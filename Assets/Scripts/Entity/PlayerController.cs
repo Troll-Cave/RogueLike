@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
                 var enemyTarget = collider.gameObject.GetComponent<Combat>();
 
-                var mainHand = inventory.equipment.FirstOrDefault(i => i.slot == EquipSlot.mainWeapon);
+                var mainHand = inventory.equipment.FirstOrDefault(i => i.slot == EquipSlot.MainWeapon);
 
                 if (mainHand != null)
                 {

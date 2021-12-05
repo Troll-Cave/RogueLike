@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,10 +6,17 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<ItemQuantity> Items = new List<ItemQuantity>();
+    public List<ItemQuantity> items = new List<ItemQuantity>();
     public List<Item> equipment = new List<Item>();
 
     public bool HasLight;
+
+    private Combat playerCombat;
+
+    private void Awake()
+    {
+        playerCombat = GetComponent<Combat>();
+    }
 
     public void UpdateStats(Combat combat)
     {
@@ -24,9 +32,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItem(Item item, bool sendUpdate = true)
+    public void RemoveItem(Item item, int count = 1, bool sendUpdate = true)
     {
-        Items.RemoveAll(x => x.Item.name == item.name);
+        var tempItem = GetItem(item);
+
+        tempItem.quantity -= count;
+        
+        if (tempItem.quantity <= 0)
+        {
+            items.Remove(tempItem);
+        }
 
         if (sendUpdate)
         {
@@ -36,7 +51,7 @@ public class Inventory : MonoBehaviour
 
     public void EquipItem(Item item)
     {
-        RemoveItem(item, false);
+        RemoveItem(item, 1, false);
         UnEquipItem(item.slot, false);
 
         equipment.Add(item);
@@ -48,11 +63,13 @@ public class Inventory : MonoBehaviour
     {
         Item item = equipment.FirstOrDefault(i => i.slot == slot);
 
-        Items.Add(new ItemQuantity
+        if (item == null)
         {
-            Item = item,
-            quantity = item.quantity,
-        });
+            return;
+        }
+
+        AddItem(item, false);
+        equipment.RemoveAll(x => x.slot == slot);
 
         if (sendUpdate)
         {
@@ -62,7 +79,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item, bool sendUpdate = true)
     {
-        var currentItem = Items.FirstOrDefault(x => x.Item.name == item.name);
+        var currentItem = items.FirstOrDefault(x => x.item.name == item.name);
 
         if (currentItem != null)
         {
@@ -70,10 +87,10 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            Items.Add(new ItemQuantity
+            items.Add(new ItemQuantity
             {
                 quantity = item.quantity,
-                Item = item,
+                item = item,
             });
         }
 
@@ -83,10 +100,38 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="combat"></param>
-    /// <returns>Whether or not to reload the UI</returns>
-    
+    public void UseItem(Item item)
+    {
+        var itemQuantity = GetItem(item.GetInstanceID());
+
+        if (itemQuantity != null)
+        {
+            foreach (var statChange in itemQuantity.item.statChanges)
+            {
+                if (statChange.stat == Stat.fullness)
+                {
+                    playerCombat.stats[Stat.fullness] += statChange.change;
+                }
+            }
+
+            itemQuantity.quantity -= 1;
+
+            if (itemQuantity.quantity <= 0)
+            {
+                items.Remove(itemQuantity);
+            }
+
+            EventsDispatcher.inventoryUpdated();
+            EventsDispatcher.statsChanged(playerCombat);
+        }
+    }
+
+    private ItemQuantity GetItem(int id)
+    {
+        return items.FirstOrDefault(x => x.item.GetInstanceID() == id);
+    }
+    private ItemQuantity GetItem(Item item)
+    {
+        return GetItem(item.GetInstanceID());
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -185,8 +186,57 @@ public class UIScript : MonoBehaviour
     {
         var inventoryContainer = mainUI.rootVisualElement.Query<VisualElement>("inventoryContainer").First();
         inventoryContainer.Clear();
+
+        var equipment = inventory.equipment.OrderBy(x => x.slot);
+
+        var equipmentContainer = new VisualElement();
+        equipmentContainer.AddToClassList("equipment-container");
+        inventoryContainer.Add(equipmentContainer);
+
+        foreach (var equipmentItem in equipment)
+        {
+            var slotElement = new VisualElement();
+            slotElement.AddToClassList("inventory-item");
+            //ve.AddToClassList("eqipment-item");
+
+            equipmentContainer.Add(slotElement);
+
+            var slotLabel = new Label()
+            {
+                text = equipmentItem.slot.ToString()
+            };
+            slotLabel.AddToClassList("small-box");
+            slotElement.Add(slotLabel);
+
+            var equipmentElement = new VisualElement();
+            equipmentElement.AddToClassList("inventory-item");
+            equipmentElement.AddToClassList("equipment-label");
+
+            equipmentContainer.Add(equipmentElement);
+
+            var equipmentLabel = new Label()
+            {
+                text = equipmentItem.name
+            };
+            equipmentLabel.AddToClassList("small-box");
+
+            var removeButton = new Button()
+            {
+                text = "Remove"
+            };
+            removeButton.AddToClassList("grab-button");
+
+            removeButton.clicked += () =>
+            {
+                removeButton.Blur();
+                inventory.UnEquipItem(equipmentItem.slot);
+            };
+
+            equipmentElement.Add(equipmentLabel);
+            equipmentElement.Add(removeButton);
+        }
         
-        foreach (var item in inventory.Items)
+        foreach (var item in inventory.items)
         {
             var ve = new VisualElement();
             ve.AddToClassList("inventory-item");
@@ -195,14 +245,14 @@ public class UIScript : MonoBehaviour
 
             var itemLabel = new Label()
             {
-                text = $"{item.Item.name} ({item.quantity})"
+                text = $"{item.item.name} ({item.quantity})"
             };
 
             itemLabel.AddToClassList("small-box");
 
             ve.Add(itemLabel);
 
-            if (item.Item.slot != EquipSlot.none)
+            if (item.item.slot != EquipSlot.None)
             {
                 // this is equipable
                 var equipButton = new Button()
@@ -216,9 +266,39 @@ public class UIScript : MonoBehaviour
                 equipButton.clicked += () =>
                 {
                     equipButton.Blur();
-                    inventory.EquipItem(item.Item);
+                    inventory.EquipItem(item.item);
                 };
             }
+            else if (item.item.isConsumable)
+            {
+                var useButton = new Button()
+                {
+                    text = "Use"
+                };
+
+                useButton.AddToClassList("grab-button");
+                ve.Add(useButton);
+
+                useButton.clicked += () =>
+                {
+                    useButton.Blur();
+                    inventory.UseItem(item.item);
+                };
+            }
+
+            var dropButton = new Button()
+            {
+                text = "Drop"
+            };
+
+            dropButton.AddToClassList("grab-button");
+            ve.Add(dropButton);
+
+            dropButton.clicked += () =>
+            {
+                dropButton.Blur();
+                inventory.RemoveItem(item.item, 99, true);
+            };
         }
     }
 
