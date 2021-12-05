@@ -805,9 +805,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: equipment.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: MainWeaponSlot.maxHit
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: equipment.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: ada1d25e3206b2d40bb9c883a4fed4cf, type: 2}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: equipment.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 395aa91c3ee445a4cae4ea8546c96c59, type: 2}
     - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: Items.Array.data[0].Item
       value: 
