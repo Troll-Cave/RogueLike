@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public InventoryItem HelmetSlot;
-    public InventoryItem MainWeaponSlot;
+    public Item HelmetSlot;
+    public Item MainWeaponSlot;
 
-    public List<InventoryItem> Items = new List<InventoryItem>();
-    public List<InventoryItem> currentDrops = new List<InventoryItem>();
+    public List<ItemQuantity> Items = new List<ItemQuantity>();
 
     public bool HasLight;
 
@@ -27,9 +26,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItem(InventoryItem item, bool sendUpdate = true)
+    public void RemoveItem(Item item, bool sendUpdate = true)
     {
-        Items.RemoveAll(x => x.name == item.name);
+        Items.RemoveAll(x => x.Item.name == item.name);
 
         if (sendUpdate)
         {
@@ -37,7 +36,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void EquipItem(InventoryItem item)
+    public void EquipItem(Item item)
     {
         RemoveItem(item, false);
         UnEquipItem(item.slot, false);
@@ -57,7 +56,7 @@ public class Inventory : MonoBehaviour
     
     public void UnEquipItem(EquipSlot slot, bool sendUpdate = true)
     {
-        InventoryItem item = null;
+        Item item = null;
 
         if (slot == EquipSlot.helmet)
         {
@@ -70,7 +69,11 @@ public class Inventory : MonoBehaviour
             MainWeaponSlot = null;
         }
 
-        Items.Add(item);
+        Items.Add(new ItemQuantity
+        {
+            Item = item,
+            quantity = item.quantity,
+        });
 
         if (sendUpdate)
         {
@@ -78,9 +81,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(InventoryItem item, bool sendUpdate = true)
+    public void AddItem(Item item, bool sendUpdate = true)
     {
-        var currentItem = Items.FirstOrDefault(x => x.name == item.name);
+        var currentItem = Items.FirstOrDefault(x => x.Item.name == item.name);
 
         if (currentItem != null)
         {
@@ -88,7 +91,11 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            Items.Add(item);
+            Items.Add(new ItemQuantity
+            {
+                quantity = item.quantity,
+                Item = item,
+            });
         }
 
         if (sendUpdate)

@@ -580,6 +580,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 511591154, guid: 25d244db23f58ed4c9c3358046dde784, type: 3}
+      propertyPath: uiScript
+      value: 
+      objectReference: {fileID: 1872939009}
     - target: {fileID: 8898843320008823162, guid: 25d244db23f58ed4c9c3358046dde784, type: 3}
       propertyPath: m_UIInputModule
       value: 

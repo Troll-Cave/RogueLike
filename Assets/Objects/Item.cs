@@ -13,32 +13,13 @@ public class Item : ScriptableObject
 
     public bool stackable = false;
     public int quantity = 1;
-
-    public InventoryItem MakeItem()
-    {
-        return new InventoryItem()
-        {
-            name = name,
-            slot = slot,
-            statChanges = statChanges.Select(x => x).ToList(),
-            maxHit = maxHit,
-            stackable = stackable,
-            quantity = quantity
-        };
-    }
 }
 
 [Serializable]
-public class InventoryItem
+public class ItemQuantity
 {
-    public string name;
-
-    public EquipSlot slot;
-    public List<StatChange> statChanges;
-    public int maxHit;
-
-    public bool stackable = false;
-    public int quantity = 1;
+    public int quantity;
+    public Item Item;
 }
 
 [Serializable]

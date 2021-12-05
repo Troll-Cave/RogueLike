@@ -17,5 +17,5 @@ public class Enemy : ScriptableObject
 
     public int maxHit;
 
-    public DropTable dropTable;
+    public List<DropTable> dropTable;
 }

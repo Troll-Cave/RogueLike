@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Extensions;
 using UnityEngine.U2D;
+using System.Linq;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -37,11 +38,11 @@ public class EnemyAI : MonoBehaviour
     {
         if (combat.GetStat(Stat.health) < 1)
         {
-            var drop = enemy.dropTable?.GetItem();
-            if (drop != null)
+            var drops = enemy.dropTable?.Select(x => x.GetItem())?.Where(x => x != null);
+            if (drops != null)
             {
                 var dropHolder = Instantiate(dropsPrefab, transform.position, Quaternion.identity);
-                dropHolder.GetComponent<DropsHolder>().items.Add(drop);
+                dropHolder.GetComponent<DropsHolder>().items.AddRange(drops);
             }
 
             Destroy(gameObject);

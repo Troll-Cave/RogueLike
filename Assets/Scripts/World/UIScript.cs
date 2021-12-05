@@ -112,7 +112,7 @@ public class UIScript : MonoBehaviour
                     {
                         holder.items.Remove(item);
 
-                        inventory.AddItem(item.MakeItem());
+                        inventory.AddItem(item);
 
                         if (holder.items.Count == 0)
                         {
@@ -195,14 +195,14 @@ public class UIScript : MonoBehaviour
 
             var itemLabel = new Label()
             {
-                text = $"{item.name} ({item.quantity})"
+                text = $"{item.Item.name} ({item.quantity})"
             };
 
             itemLabel.AddToClassList("small-box");
 
             ve.Add(itemLabel);
 
-            if (item.slot != EquipSlot.none)
+            if (item.Item.slot != EquipSlot.none)
             {
                 // this is equipable
                 var equipButton = new Button()
@@ -216,7 +216,7 @@ public class UIScript : MonoBehaviour
                 equipButton.clicked += () =>
                 {
                     equipButton.Blur();
-                    inventory.EquipItem(item);
+                    inventory.EquipItem(item.Item);
                 };
             }
         }
