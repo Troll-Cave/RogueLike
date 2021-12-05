@@ -23,3 +23,4 @@ MonoBehaviour:
   maxHit: 4
   dropTable:
   - {fileID: 11400000, guid: 5a467a0fee001014c80dd9106614762e, type: 2}
+  - {fileID: 11400000, guid: bcb575c51fd6d3049bc2244ff32f7671, type: 2}

@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a52fd82c1078d44ab3cdd24fe45a537, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  drops: []
+  drops:
+  - chance: 80
+    item: {fileID: 11400000, guid: 945842621c69d1747b9bc262942b2cfc, type: 2}

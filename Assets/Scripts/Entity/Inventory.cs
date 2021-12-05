@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public Item HelmetSlot;
-    public Item MainWeaponSlot;
-
     public List<ItemQuantity> Items = new List<ItemQuantity>();
+    public List<Item> equipment = new List<Item>();
 
     public bool HasLight;
 
@@ -17,11 +15,11 @@ public class Inventory : MonoBehaviour
         // clear all combat effects
         combat.effects.RemoveAll(x => x.source == EffectSource.equipment);
 
-        if (HelmetSlot != null)
+        foreach (var item in equipment)
         {
-            foreach (var changes in HelmetSlot.statChanges)
+            foreach (var changes in item.statChanges)
             {
-                combat.effects.Add(new Effect("helmet-" + changes.stat.ToString(), "Helmet", changes.stat, changes.change));
+                combat.effects.Add(new Effect("equip-" + changes.stat.ToString(), item.slot.ToString(), changes.stat, changes.change));
             }
         }
     }
@@ -41,33 +39,14 @@ public class Inventory : MonoBehaviour
         RemoveItem(item, false);
         UnEquipItem(item.slot, false);
 
-        // put on the thing
-        if (item.slot == EquipSlot.helmet)
-        {
-            HelmetSlot = item;
-        }
-        else if (item.slot == EquipSlot.mainWeapon)
-        {
-            MainWeaponSlot = item;
-        }
+        equipment.Add(item);
 
         EventsDispatcher.inventoryUpdated();
     }
     
     public void UnEquipItem(EquipSlot slot, bool sendUpdate = true)
     {
-        Item item = null;
-
-        if (slot == EquipSlot.helmet)
-        {
-            item = HelmetSlot;
-            HelmetSlot = null;
-        }
-        else if (slot == EquipSlot.mainWeapon)
-        {
-            item = MainWeaponSlot;
-            MainWeaponSlot = null;
-        }
+        Item item = equipment.FirstOrDefault(i => i.slot == slot);
 
         Items.Add(new ItemQuantity
         {

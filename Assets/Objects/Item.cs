@@ -13,8 +13,16 @@ public class Item : ScriptableObject
 
     public bool stackable = false;
     public int quantity = 1;
-}
 
+    /// <summary>
+    /// Basically this will be true if it's not a slot and it has stat changes attached to it
+    /// </summary>
+    public bool isConsumable
+    {
+        get { return slot == EquipSlot.none && (statChanges?.Count ?? 0) > 0; }
+    }
+}
+// TODO: move this somewhere else
 [Serializable]
 public class ItemQuantity
 {
@@ -33,5 +41,13 @@ public enum EquipSlot
 {
     none,
     mainWeapon,
-    helmet
+    offWeapon,
+    helmet,
+    chest,
+    legs,
+    gloves,
+    boots,
+    ammo,
+    ring,
+    neck,
 }

@@ -801,8 +801,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: Items.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: MainWeaponSlot.maxHit
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: Items.Array.data[0].Item
+      value: 
+      objectReference: {fileID: 11400000, guid: 945842621c69d1747b9bc262942b2cfc, type: 2}
+    - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
+      propertyPath: Items.Array.data[0].quantity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1890307966, guid: 6cfa42f44b0cd2b4a9ac42c07b04fe70, type: 3}
       propertyPath: HelmetSlot.statChanges.Array.size

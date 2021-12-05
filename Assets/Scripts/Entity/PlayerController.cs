@@ -159,9 +159,11 @@ public class PlayerController : MonoBehaviour
 
                 var enemyTarget = collider.gameObject.GetComponent<Combat>();
 
-                if (inventory.MainWeaponSlot != null)
+                var mainHand = inventory.equipment.FirstOrDefault(i => i.slot == EquipSlot.mainWeapon);
+
+                if (mainHand != null)
                 {
-                    playerCombat.Attack(enemyTarget, Stat.strength, inventory.MainWeaponSlot.maxHit);
+                    playerCombat.Attack(enemyTarget, Stat.strength, mainHand.maxHit);
                 }
                 else
                 {

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Meat
   m_EditorClassIdentifier: 
   slot: 0
-  statChanges: []
+  statChanges:
+  - stat: 7
+    change: 15
   maxHit: 0
   stackable: 0
   quantity: 1
